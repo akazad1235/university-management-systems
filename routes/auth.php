@@ -61,13 +61,13 @@ Route::middleware('auth')->group(function () {
                 ->name('logout');
 });
 
-Route::prefix('/super-admin')->name('super.admin.')->group(function(){
-    Route::get('/login', [SuperAdminAuth::class, 'create'])->name('login');
-    Route::post('/login', [SuperAdminAuth::class, 'store']);
-    Route::get('/logout', [SuperAdminAuth::class, 'destroy'])->name('logout');
+Route::prefix('/admin')->name('admin.')->group(function(){
+    Route::get('/login', [AdminAuth::class, 'create'])->middleware('guest:admin')->name('login');
+    Route::post('/login', [AdminAuth::class, 'store'])->middleware('guest:admin');
+    Route::get('/logout', [AdminAuth::class, 'destroy'])->name('logout');
     Route::get('/dashboard', function (){
-        return 'welcome super admin';
-    });
+        return view('admin.dashboard');
+    })->middleware('admin');
 });
 Route::prefix('/university')->name('university.')->group(function(){
     Route::get('/login', [UniversityAuth::class, 'create'])->middleware('guest:university')->name('login');

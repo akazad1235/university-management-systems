@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\AdminAuthRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -17,19 +18,20 @@ class AuthenticateSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('admin.auth.login');
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(AdminAuthRequest $request): RedirectResponse
     {
-        $request->authenticate();
 
+        $request->authenticate();
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+
+        return redirect()->intended(RouteServiceProvider::AdminAuth);
     }
 
     /**
@@ -37,12 +39,12 @@ class AuthenticateSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('admin.login');
     }
 }

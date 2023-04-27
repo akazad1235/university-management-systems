@@ -1,9 +1,9 @@
 <x-guest-layout>
-    <h3 style="color: white; text-align: center">University Login</h3>
+    <h3 style="color: white; text-align: center">Admin Login</h3>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('university.login') }}">
+    <form method="POST" action="{{ route('admin.login') }}">
     @csrf
 
     <!-- Email Address -->
