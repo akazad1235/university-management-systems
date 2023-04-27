@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\SuperAdmin\Auth\AuthenticateSessionController as SuperAdminAuth;
 use App\Http\Controllers\Admin\Auth\AuthenticateSessionController as AdminAuth;
-use App\Http\Controllers\University\Auth\AuthenticateSessionController as VarsityAuth;
+use App\Http\Controllers\University\Auth\AuthenticateSessionController as UniversityAuth;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -68,4 +68,12 @@ Route::prefix('/super-admin')->name('super.admin.')->group(function(){
     Route::get('/dashboard', function (){
         return 'welcome super admin';
     });
+});
+Route::prefix('/university')->name('university.')->group(function(){
+    Route::get('/login', [UniversityAuth::class, 'create'])->middleware('guest:university')->name('login');
+    Route::post('/login', [UniversityAuth::class, 'store'])->middleware('guest:university');
+    Route::get('/logout', [UniversityAuth::class, 'destroy'])->name('logout');
+    Route::get('/dashboard', function (){
+      return view('university.dashboard');
+    })->middleware('university');
 });
