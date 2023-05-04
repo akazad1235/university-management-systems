@@ -17,41 +17,17 @@
         <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
           <li class="nav-item">
             <!-- parent pages--><a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
-              <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span></div>
+              <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Role Management</span></div>
             </a>
             <ul class="nav collapse show" id="dashboard">
-              <li class="nav-item"><a class="nav-link" href="../index.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span></div>
+              <li class="nav-item"><a class="nav-link" href="{{ route('permission.role') }}">
+                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Role</span></div>
                 </a><!-- more inner pages-->
               </li>
-              <li class="nav-item"><a class="nav-link" href="analytics.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span></div>
-                </a><!-- more inner pages-->
-              </li>
-              <li class="nav-item"><a class="nav-link" href="crm.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span></div>
-                </a><!-- more inner pages-->
-              </li>
-              <li class="nav-item"><a class="nav-link" href="e-commerce.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span></div>
-                </a><!-- more inner pages-->
-              </li>
-              <li class="nav-item"><a class="nav-link" href="lms.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">LMS</span><span class="badge rounded-pill ms-2 badge-subtle-success">New</span></div>
-                </a><!-- more inner pages-->
-              </li>
-              <li class="nav-item"><a class="nav-link active" href="project-management.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span></div>
-                </a><!-- more inner pages-->
-              </li>
-              <li class="nav-item"><a class="nav-link" href="saas.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span></div>
-                </a><!-- more inner pages-->
-              </li>
-              <li class="nav-item"><a class="nav-link" href="support-desk.html">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Support desk</span><span class="badge rounded-pill ms-2 badge-subtle-success">New</span></div>
-                </a><!-- more inner pages-->
-              </li>
+              <li class="nav-item"><a class="nav-link" href="{{ route('permission.role') }}">
+                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Permission</span></div>
+              </a><!-- more inner pages-->
+            </li>
             </ul>
           </li>
           <li class="nav-item">
