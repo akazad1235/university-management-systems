@@ -20,29 +20,56 @@ class PermissionSeeder extends Seeder
         Role::create(['name' => 'user']);
 
         $permissions = [
-            //role
-            'role-create',
-            'role-view',
-            'role-edit',
-            'role-delete',
+            [
+                'group_name' => 'dashboard',
+                'permissions' => [
+                    'dashboard.view',
+                    'dashboard.edit'
+                ],
+            ],
+            [
+                'group_name' => 'roles',
+                'permissions' => [
+                    'role-create',
+                    'role-view',
+                    'role-edit',
+                    'role-delete',
+                ],
+            ],
+            [
+                'group_name' => 'admin',
+                'permissions' => [
+                    'admin-create',
+                    'admin-view',
+                    'admin-edit',
+                    'admin-delete',
+                    'admin-approve',
+                ],
+            ],
+            [
+                'group_name' => 'service',
+                'permissions' => [
+                    'service-create',
+                    'service-view',
+                    'service-edit',
+                    'service-delete',
+                    'service-approve',
+                ],
+            ],
 
-            //admin
-            'admin-create',
-            'admin-view',
-            'admin-edit',
-            'admin-delete',
-            'admin-approve',
-
-            //university
-            'university-create',
-            'university-view',
-            'university-edit',
-            'university-delete',
         ];
-        for ($i =0 ; $i<count($permissions); $i++){
-            $permission = Permission::create(['name' => $permissions[$i]]);
-            $superAdmin->givePermissionTo($permission);
-            $permission ->assignRole($superAdmin);
+        for ($i=0; $i < count($permissions); $i++) {
+            $permissionGroup = $permissions[$i]['group_name'];
+            for ($j=0; $j < count($permissions[$i]['permissions']); $j++) {
+                $permission = Permission::create(
+                    [
+                        'name' => $permissions[$i]['permissions'][$j],
+                        'group_name' => $permissionGroup
+                    ]
+                );
+                $superAdmin->givePermissionTo($permission);
+                $permission ->assignRole($superAdmin);
+            }
         }
     }
 }

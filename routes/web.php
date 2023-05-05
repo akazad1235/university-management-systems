@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,18 @@ Route::get('/', function () {
 
 
 
-Route::prefix('/permission')->name('permission.')->group(function(){
+Route::middleware(['auth'])->prefix('/permission')->name('permission.')->group(function(){
     Route::get('/role', [RolePermissionController::class, 'index'])->name('role');
     Route::get('/role/create', [RolePermissionController::class, 'create'])->name('role.create');
     Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->prefix('/user')->name('user.')->group(function(){
+    Route::get('/index', [UserController::class, 'index'])->name('index');
+    Route::get('/create', [UserController::class, 'create'])->name('create');
+    Route::post('/store', [UserController::class, 'store'])->name('store');
+});
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
