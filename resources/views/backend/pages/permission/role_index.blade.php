@@ -25,6 +25,7 @@
                     <thead class="bg-200 text-900">
                       <tr>
                         <th class="sort" data-sort="name">Name</th>
+                        <th class="sort" data-sort="name">Permissions</th>
                         <th class="sort" data-sort="age">Action</th>
                       </tr>
                     </thead>
@@ -32,7 +33,13 @@
                     @foreach($roles as $role)
                         <tr>
                             <td class="name">{{ $role->name  }}</td>
+                            <td class="name">
+                                @foreach ($role->permissions as $permission)
+                                <span class="badge text-bg-secondary">{{ $permission->name }}</span>
+                                @endforeach
+                            </td>
                             <td class="age">
+                                <a href="{{ route('permission.role.show', $role->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>

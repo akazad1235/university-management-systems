@@ -14,7 +14,7 @@ class RolePermissionController extends Controller
     public function index(){
 //       $user =  User::find(8);
 //       return $user->givePermissionTo('admin-create');
-        $roles =  Role::get();
+        $roles =  Role::with('permissions:id,name')->get();
         return view('backend.pages.permission.role_index', ['roles' => $roles]);
     }
     public function create(){
@@ -25,7 +25,6 @@ class RolePermissionController extends Controller
         return view('backend.pages.permission.role_create', ['permissions' => $permissions, 'groupByPermissions' => $groupByPermissions]);
     }
     public function store(Request $request){
-       // return  $request->all();
        $role = Role::create([
             'name' => $request->name,
            'group_name' => $request->group_name
@@ -34,5 +33,8 @@ class RolePermissionController extends Controller
         $role->syncPermissions($permissions);
 
         return 'success';
+    }
+    public function show($id){
+        return $id;
     }
 }

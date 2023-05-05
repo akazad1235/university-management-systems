@@ -27,7 +27,9 @@ Route::middleware(['auth'])->prefix('/permission')->name('permission.')->group(f
     Route::get('/role', [RolePermissionController::class, 'index'])->name('role');
     Route::get('/role/create', [RolePermissionController::class, 'create'])->name('role.create');
     Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::post('/role/show/{id}', [RolePermissionController::class, 'show'])->name('role.show');
+    Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
+});
 
 Route::middleware(['auth'])->prefix('/user')->name('user.')->group(function(){
     Route::get('/index', [UserController::class, 'index'])->name('index');
