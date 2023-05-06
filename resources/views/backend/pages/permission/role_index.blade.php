@@ -39,7 +39,7 @@
                                 @endforeach
                             </td>
                             <td class="age">
-                                <a href="{{ route('permission.role.show', $role->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('permission.role.edit', base64_encode($role->id)) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>

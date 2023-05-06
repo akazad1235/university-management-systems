@@ -34,7 +34,11 @@ class RolePermissionController extends Controller
 
         return 'success';
     }
-    public function show($id){
-        return $id;
+    public function edit($id){
+        $role =   Role::findById(base64_decode($id));
+        $groupByPermissions =  User::getPermissionGroupBy();
+        $permissions =  Permission::get();
+      return view('backend.pages.permission.role_edit', ['role' => $role, 'groupByPermissions' => $groupByPermissions, 'permissions' => $permissions]);
+
     }
 }

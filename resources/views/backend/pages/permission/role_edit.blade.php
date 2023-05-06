@@ -15,12 +15,12 @@
           </div>
         </div>
         <div class="card-body pt-0">
-            <form action="{{ route('permission.role.store') }}" method="post">
+            <form action="{{ route('permission.role.update', base64_encode($role->id)) }}" method="post">
                 @csrf
                 <div class="row mb-3">
                   <label for="role" class="col-sm-2 col-form-label">Role Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="name" id="role">
+                    <input type="text" class="form-control" name="name" value="{{ $role->name }}" id="role">
                   </div>
                 </div>
                 <div class="form-group">
@@ -49,7 +49,7 @@
                         <div class="col-md-9 role-{{$i}}-management-checkbox">
                             @foreach ($permissionNames as $permissionName)
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="permissions[]" value="{{ $permissionName->name }}" id="check">
+                                    <input type="checkbox" class="form-check-input" {{$role->hasPermissionTo($permissionName->name)?'checked':''}} name="permissions[]" value="{{ $permissionName->name }}" id="check">
                                     <label for="check">{{ $permissionName->name }}</label>
                                 </div>
                                 @php

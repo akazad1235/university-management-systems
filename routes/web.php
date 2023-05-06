@@ -27,8 +27,8 @@ Route::middleware(['auth'])->prefix('/permission')->name('permission.')->group(f
     Route::get('/role', [RolePermissionController::class, 'index'])->name('role');
     Route::get('/role/create', [RolePermissionController::class, 'create'])->name('role.create');
     Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
-    Route::post('/role/show/{id}', [RolePermissionController::class, 'show'])->name('role.show');
-    Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
+    Route::get('/role/edit/{id}', [RolePermissionController::class, 'edit'])->name('role.edit');
+    Route::post('/role/update/{id}', [RolePermissionController::class, 'update'])->name('role.update');
 });
 
 Route::middleware(['auth'])->prefix('/user')->name('user.')->group(function(){
