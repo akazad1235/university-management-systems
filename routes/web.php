@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,20 +22,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware(['auth'])->group(function(){
+    //role permission
+    Route::prefix('/permission')->name('permission.')->group(function(){
+        Route::get('/role', [RolePermissionController::class, 'index'])->name('role');
+        Route::get('/role/create', [RolePermissionController::class, 'create'])->name('role.create');
+        Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
+        Route::get('/role/edit/{id}', [RolePermissionController::class, 'edit'])->name('role.edit');
+        Route::post('/role/update/{id}', [RolePermissionController::class, 'update'])->name('role.update');
+    });
+    //users
+    Route::prefix('/user')->name('user.')->group(function(){
+        Route::get('/index', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/store', [UserController::class, 'store'])->name('store');
+    });
 
-
-Route::middleware(['auth'])->prefix('/permission')->name('permission.')->group(function(){
-    Route::get('/role', [RolePermissionController::class, 'index'])->name('role');
-    Route::get('/role/create', [RolePermissionController::class, 'create'])->name('role.create');
-    Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
-    Route::get('/role/edit/{id}', [RolePermissionController::class, 'edit'])->name('role.edit');
-    Route::post('/role/update/{id}', [RolePermissionController::class, 'update'])->name('role.update');
-});
-
-Route::middleware(['auth'])->prefix('/user')->name('user.')->group(function(){
-    Route::get('/index', [UserController::class, 'index'])->name('index');
-    Route::get('/create', [UserController::class, 'create'])->name('create');
-    Route::post('/store', [UserController::class, 'store'])->name('store');
+    //services
+    Route::prefix('/service')->name('services.')->group(function(){
+        Route::get('/list', [ServiceController::class, 'index'])->name('service');
+    });
+    //dashboard
+    Route::prefix('/{$serviceName}')->name('service.')->group(function(){
+        Route::get('/dashboard/{id}', [ServiceController::class, 'index'])->name('dashboard');
+    });
 });
 
 // Route::get('/', function () {
@@ -43,7 +54,8 @@ Route::middleware(['auth'])->prefix('/user')->name('user.')->group(function(){
 
 Route::get('/dashboard', function () {
    // return view('dashboard');
-    return view('backend.dashboard');
+   // return view('backend.dashboard');
+    return view('backend.service');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
