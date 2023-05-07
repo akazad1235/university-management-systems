@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -15,9 +17,13 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $superAdmin = Role::create(['name' => 'super-admin']);
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'university']);
-        Role::create(['name' => 'user']);
+        $user = User::create([
+            'name' => 'super Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make(12345678)
+        ]);
+        // Role::create(['name' => 'admin']);
+        // Role::create(['name' => 'user']);
 
         $permissions = [
             [
@@ -67,8 +73,11 @@ class PermissionSeeder extends Seeder
                         'group_name' => $permissionGroup
                     ]
                 );
-                $superAdmin->givePermissionTo($permission);
-                $permission ->assignRole($superAdmin);
+
+                // $superAdmin->givePermissionTo($permission);
+                // $permission ->assignRole($superAdmin);
+                 $superAdmin->givePermissionTo($permission);
+                 $user->assignRole($superAdmin);
             }
         }
     }

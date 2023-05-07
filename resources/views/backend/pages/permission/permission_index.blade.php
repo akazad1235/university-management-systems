@@ -9,12 +9,8 @@
             <div class="col-auto align-self-center">
               <h5 class="mb-0" data-anchor="data-anchor">Pagination with numbering</h5>
             </div>
-
             <div class="col-auto ms-auto">
-                @can('role-edit')
-                    <a href="{{ route('user.create') }}"><button class="btn btn-info">Create a new user</button></a>
-                @endcan
-
+                <a href="{{ route('permission.role.create') }}"><button class="btn btn-info">Create a new role</button></a>
             </div>
           </div>
         </div>
@@ -29,24 +25,21 @@
                     <thead class="bg-200 text-900">
                       <tr>
                         <th class="sort" data-sort="name">Name</th>
-                        <th class="sort" data-sort="name">Email</th>
-                        <th class="sort" data-sort="name">Roles</th>
+                        <th class="sort" data-sort="name">Permissions</th>
                         <th class="sort" data-sort="age">Action</th>
                       </tr>
                     </thead>
                     <tbody class="list">
-                    @foreach($users as $key => $user)
+                    @foreach($roles as $role)
                         <tr>
-                            <td class="name">{{ $user->name  }}</td>
-                            <td class="name">{{ $user->email  }}</td>
-                            @if(count($users[$key]->roles)>0)
-                                @foreach ($user->roles as $role )
-                                <td class="name">{{ $role->name }}</td>
+                            <td class="name">{{ $role->name  }}</td>
+                            <td class="name">
+                                @foreach ($role->permissions as $permission)
+                                <span class="badge text-bg-secondary">{{ $permission->name }}</span>
                                 @endforeach
-                            @else
-                                <td class="name">Null</td>
-                            @endif
+                            </td>
                             <td class="age">
+                                <a href="{{ route('permission.role.edit', base64_encode($role->id)) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
