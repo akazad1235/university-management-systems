@@ -12,9 +12,9 @@
         <div class="col-md-12">
             <ul class="list-group">
                 @foreach ($services as $service)
-                    <a href="{{ route('service.dashboard',[$service->name, $service->id]) }}" class="list-group-item">{{ $service->name }}</a>
+                    <a href="{{ route('service.dashboard',[ $service->slug, base64_encode($service->id)]) }}" class="list-group-item">{{ $service->name }}</a>
                 @endforeach
-              </ul>
+            </ul>
         </div>
 
     <script src="{{asset('vendors/popper/popper.min.js')}}"></script>

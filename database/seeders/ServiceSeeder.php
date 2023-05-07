@@ -16,6 +16,7 @@ class ServiceSeeder extends Seeder
        for ($i=1; $i < 10; $i++) {
         Service::create([
             'name' => 'service'.$i,
+            'slug' => 'service'.$i,
             'created_by' =>$i,
         ]);
        }
