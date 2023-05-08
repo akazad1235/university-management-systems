@@ -24,22 +24,22 @@
                   <table class="table table-bordered table-striped fs--1 mb-0">
                     <thead class="bg-200 text-900">
                       <tr>
-                        <th class="sort" data-sort="name">Name</th>
+                        <th class="sort" data-sort="name">Group Name</th>
                         <th class="sort" data-sort="name">Permissions</th>
                         <th class="sort" data-sort="age">Action</th>
                       </tr>
                     </thead>
                     <tbody class="list">
-                    @foreach($roles as $role)
+                    @foreach($permissions as $groupName => $items)
                         <tr>
-                            <td class="name">{{ $role->name  }}</td>
+                            <td class="name">{{ $groupName  }}</td>
                             <td class="name">
-                                @foreach ($role->permissions as $permission)
+                                @foreach ($items as $permission)
                                 <span class="badge text-bg-secondary">{{ $permission->name }}</span>
                                 @endforeach
                             </td>
                             <td class="age">
-                                <a href="{{ route('permission.role.edit', base64_encode($role->id)) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>

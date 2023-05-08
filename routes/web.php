@@ -21,7 +21,7 @@ use App\Http\Controllers\Permission\PermissionController;
 
 Route::get('/', function () {
    // return view('backend.dashboard');
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::middleware(['auth'])->group(function(){
