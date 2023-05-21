@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,4 +20,8 @@
     <script src="{{asset('vendors/popper/popper.min.js')}}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.min.js') }}"></script>
 </body>
-</html>
+</html> --}}
+
+@extends('layout.app')
+@section('title', 'Projects')
+@include('layout.navbar')

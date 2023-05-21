@@ -10,7 +10,7 @@ var CONFIG = {
   theme: 'light',
   isRTL: false,
   isFluid: false,
-  navbarStyle: 'transparent',
+  navbarStyle: 'card',
   navbarPosition: 'vertical'
 };
 Object.keys(CONFIG).forEach(function (key) {
