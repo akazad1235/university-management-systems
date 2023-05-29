@@ -11,13 +11,13 @@
             <div class="card">
                 <div class="card-body p-4 p-sm-5">
                     <div class="row flex-between-center mb-2">
-                        <div class="col-auto">
-                            <h5>Log in</h5>
+                        <div class="col-12 text-center mb-3">
+                            <h4>Log in</h4>
                         </div>
-                        <div class="col-auto fs--1 text-600">
+                        {{-- <div class="col-auto fs--1 text-600">
                             <span class="mb-0 undefined">or</span> <span><a href="{{ route('register') }}">Create an
                                     account</a></span>
-                        </div>
+                        </div> --}}
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -27,7 +27,7 @@
                         <div class="mb-3">
                             <input class="form-control" name="password" type="password" placeholder="Password" />
                         </div>
-                        <div class="row flex-between-center">
+                        {{-- <div class="row flex-between-center">
                             <div class="col-auto">
                                 <div class="form-check mb-0"><input class="form-check-input" type="checkbox"
                                         id="basic-checkbox" checked="checked" /><label class="form-check-label mb-0"
@@ -36,8 +36,8 @@
                             </div>
                             <div class="col-auto"><a class="fs--1" href="{{ route('password.request') }}">Forgot
                                     Password?</a></div>
-                        </div>
-                        <div class="mb-3"><button class="btn btn-primary d-block w-100 mt-3" type="submit"
+                        </div> --}}
+                        <div class="mb-3 pt-1"><button class="btn btn-primary d-block w-100 mt-3" type="submit"
                                 name="submit">Log
                                 in</button></div>
                     </form>

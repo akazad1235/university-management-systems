@@ -57,7 +57,7 @@
                         <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0"
                             aria-labelledby="dashboards">
                             <div class="bg-white dark__bg-1000 rounded-3 py-2">
-                                <a class="dropdown-item link-600 fw-medium" href="/">Default</a>
+                                <a class="dropdown-item link-600 fw-medium" href="/">Project</a>
                             </div>
                         </div>
                     </li>
@@ -99,7 +99,7 @@
                         </a>
                         <ul class="nav collapse show" id="dashboard">
                             <li class="nav-item"><a class="nav-link active" href="/">
-                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
+                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Project</span>
                                     </div>
                                 </a><!-- more inner pages-->
                             </li>
@@ -129,7 +129,7 @@
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0"
                         aria-labelledby="dashboards">
                         <div class="bg-white dark__bg-1000 rounded-3 py-2"><a class="dropdown-item link-600 fw-medium"
-                                href="/">Default</a>
+                                href="/">Project</a>
 
                         </div>
                     </div>
@@ -185,6 +185,24 @@
 
         <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
             <li class="nav-item px-2">
+                <div class="demo">
+                    <div>
+                        <table class="lang">
+                            <tr>
+                                <td class="tdlang">
+                                    <span id="en" class="button_lang current_lang">EN</span>
+                                </td>
+                                {{-- <td class="tdlang"><span id="cn" class="button_lang">中文</span></td> --}}
+                                <td class="tdlang"><span id="jp" class="button_lang">日本語</span></td>
+                            </tr>
+                        </table>
+                        {{-- <div class="translation english" id="translate">
+                            The text here will change
+                        </div> --}}
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item px-2">
                 <div class="theme-control-toggle fa-icon-wait"><input
                         class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox"
                         data-theme-control="theme" value="dark" /><label
@@ -237,7 +255,7 @@
                     <div class="dropdown-menu dropdown-caret dropdown-menu-card border-0 mt-0"
                         aria-labelledby="dashboards">
                         <div class="bg-white dark__bg-1000 rounded-3 py-2">
-                            <a class="dropdown-item link-600 fw-medium" href="/">Default</a>
+                            <a class="dropdown-item link-600 fw-medium" href="/">Project</a>
                         </div>
                     </div>
                 </li>
