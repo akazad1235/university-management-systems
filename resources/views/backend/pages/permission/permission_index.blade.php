@@ -10,7 +10,7 @@
               <h5 class="mb-0" data-anchor="data-anchor">Pagination with numbering</h5>
             </div>
             <div class="col-auto ms-auto">
-                <a href="{{ route('permission.role.create') }}"><button class="btn btn-info">Create a new role</button></a>
+                <a href="{{ route('permission.create') }}"><button class="btn btn-info">Create a new role</button></a>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
                                 @endforeach
                             </td>
                             <td class="age">
-                                <a href="" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('permission.edit', base64_encode($groupName)) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
@@ -58,5 +58,4 @@
           </div>
         </div>
       </div>
-
 @endsection

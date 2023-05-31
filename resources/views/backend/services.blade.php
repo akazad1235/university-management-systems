@@ -29,8 +29,7 @@
 @section('mainContent')
     <div class="row pb-4 pt-2">
         <div class="col-12 text-end btn-lg">
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal">Create
-                Project</button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal">{{ __('staticText.projectCreate')  }}</button>
         </div>
     </div>
 
@@ -72,11 +71,11 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="active-project-tab" data-bs-toggle="tab" href="#tab-active-project"
-                role="tab" aria-controls="tab-home" aria-selected="true">Active Project</a>
+                role="tab" aria-controls="tab-home" aria-selected="true">Active Project {{session()->get('locale')}}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab-inactive-project" role="tab"
-                aria-controls="tab-profile" aria-selected="false">Inactive Project</a>
+                aria-controls="tab-profile" aria-selected="false">Inactive Project {{ __('staticText.title') }}</a>
         </li>
 
     </ul>
@@ -113,5 +112,4 @@
 
         </div>
     </div>
-
 @endsection

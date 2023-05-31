@@ -189,11 +189,11 @@
                     <div>
                         <table class="lang">
                             <tr>
-                                <td class="tdlang">
-                                    <span id="en" class="button_lang current_lang">EN</span>
+                                <td class="tdlang" onclick="langChange('en')">
+                                    <span id="en" class="button_lang {{ session()->get('locale') == 'en' ? 'current_lang' : '' }}">EN</span>
                                 </td>
                                 {{-- <td class="tdlang"><span id="cn" class="button_lang">中文</span></td> --}}
-                                <td class="tdlang"><span id="jp" class="button_lang">日本語</span></td>
+                                <td class="tdlang {{ session()->get('locale') == 'jpn' ? 'current_lang' : '' }}" onclick="langChange('jpn')"><span id="jp" class="button_lang">日本語</span></td>
                             </tr>
                         </table>
                         {{-- <div class="translation english" id="translate">
@@ -292,7 +292,7 @@
             </li>
         </ul>
     </nav>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         var navbarPosition = localStorage.getItem('navbarPosition');
         var navbarVertical = document.querySelector('.navbar-vertical');
@@ -330,5 +330,14 @@
             navbarDoubleTop.remove(navbarDoubleTop);
             navbarTopCombo.remove(navbarTopCombo);
         }
+    </script>
+{{--    language change --}}
+    <script>
+        function langChange(type){
+            var url = "{{ route('lang.change') }}";
+            alert('test')
+            window.location.href = url + "?lang="+ type;
+        }
+
     </script>
 @endsection

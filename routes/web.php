@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Permission\RolePermissionController;
 use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +28,20 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function(){
     //role permission
     Route::middleware(['role:super-admin|admin'])->prefix('/permission')->name('permission.')->group(function(){
+        //role
         Route::get('/role', [RolePermissionController::class, 'index'])->name('role');
         Route::get('/role/create', [RolePermissionController::class, 'create'])->name('role.create');
         Route::post('/role/store', [RolePermissionController::class, 'store'])->name('role.store');
         Route::get('/role/edit/{id}', [RolePermissionController::class, 'edit'])->name('role.edit');
         Route::post('/role/update/{id}', [RolePermissionController::class, 'update'])->name('role.update');
 
-
-        Route::get('/permission/index', [PermissionController::class, 'index'])->name('index');
+        //permission
+        Route::get('/index', [PermissionController::class, 'index'])->name('index');
+        Route::get('/crate', [PermissionController::class, 'create'])->name('create');
+        Route::post('/store', [PermissionController::class, 'store'])->name('store');
+        Route::get('/edit/{group_name}', [PermissionController::class, 'edit'])->name('edit');
+        Route::get('/update', [PermissionController::class, 'update'])->name('update');
+        Route::get('/delete', [PermissionController::class, 'destroy'])->name('destroy');
 
 
     });
@@ -52,6 +59,11 @@ Route::middleware(['auth'])->group(function(){
     //dashboard
     Route::prefix('/{serviceName}')->name('service.')->group(function(){
         Route::get('/dashboard/{id}', [DashboardController::class, 'dashboard'])->name('dashboard');
+    });
+    //dashboard
+    Route::prefix('/lang')->name('lang.')->group(function(){
+        Route::get('/', [LanguageController::class, 'index'])->name('index');
+        Route::get('/change', [LanguageController::class, 'change'])->name('change');
     });
 });
 

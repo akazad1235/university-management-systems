@@ -16,12 +16,12 @@
         </div>
         <hr>
         <div class="card-body pt-0">
-            <form action="{{ route('permission.store') }}" method="post">
+            <form action="" method="post">
                 @csrf
                 <div class="row mb-4">
-                  <label for="group_name" class="col-sm-2 col-md-3 col-form-label">Permissin Name</label>
+                  <label for="group_name" class="col-sm-2 col-md-3 col-form-label">Permission Name</label>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="group_name" id="group_name">
+                    <input type="text" class="form-control" name="group_name" id="group_name" value="{{ $groupByPermissions[0]['group_name']  }}">
                   </div>
                 </div>
                 <div class="form-group">
@@ -31,27 +31,24 @@
                     </div>
                     <hr>
                     <div class="d-flex">
-                        <div class="form-check m-2">
-                            <input type="checkbox" class="form-check-input" name="permission[]" value="view" id="view">
-                            <label for="view">View</label>
-                        </div>
-                        <div class="form-check m-2">
-                            <input type="checkbox" class="form-check-input" name="permission[]" value="create" id="create">
-                            <label for="create">Create</label>
-                        </div>
-                        <div class="form-check m-2">
-                            <input type="checkbox" class="form-check-input" name="permission[]" value="update" id="update">
-                            <label for="update">Update</label>
-                        </div>
-                        <div class="form-check m-2">
-                            <input type="checkbox" class="form-check-input" name="permission[]" value="delete" id="delete">
-                            <label for="delete">Delete</label>
-                        </div>
-                        <div class="form-check m-2">
-                            <input type="checkbox" class="form-check-input" name="permission[]" value="approve" id="approve">
-                            <label for="approve">Approve</label>
-                        </div>
-                    </div>
+                        @foreach($permissions as $item)
+                            @foreach($groupByPermissions as $storedPermission)
+                                @break
+                                @if($storedPermission->name == $groupByPermissions[0]['group_name'].'.'.$item)
+                                    <div class="form-check m-2">
+                                        <input type="checkbox" class="form-check-input" name="permission[]"  value="{{ $item }}" id="{{ $item }}">
+                                        <label for="{{ $item  }}" class="text-capitalize">{{$item}}</label>
+                                    </div>
+                                @endif
+
+                            @endforeach
+                                <div class="form-check m-2">
+                                    <input type="checkbox" class="form-check-input" name="permission[]"  value="{{ $item }}" id="{{ $item }}">
+                                    <label for="{{ $item  }}" class="text-capitalize">{{$item}}</label>
+                                </div>
+
+                        @endforeach
+                    </>
                 </div>
                 <button type="submit" class="btn btn-primary float-end">Submit</button>
               </form>

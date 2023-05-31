@@ -13,7 +13,13 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
-
+    const permissions = [
+        'view' => 'view',
+        'create' => 'create',
+        'edit' => 'edit',
+        'delete' => 'delete',
+        'approve' => 'approve'
+    ];
     /**
      * The attributes that are mass assignable.
      *
