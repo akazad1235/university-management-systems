@@ -29,7 +29,7 @@
 @section('mainContent')
     <div class="row pb-4 pt-2">
         <div class="col-12 text-end btn-lg">
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal">{{ __('static_data.service.projectCreate')  }}</button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal">{{ __('static_data.project.projectCreate')  }}</button>
         </div>
     </div>
 
@@ -45,34 +45,34 @@
                     @csrf
                     <div class="modal-body p-0">
                         <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
-                            <h4 class="mb-1" id="modalExampleDemoLabel">Create a New Project </h4>
+                            <h4 class="mb-1" id="modalExampleDemoLabel"> {{ __('static_data.project.modal.title') }}  </h4>
                         </div>
                         <div class="p-4 pb-0">
                                 <div class="row">
                                     <div class="col-md-6"></div>
                                 </div>
                                 <div class="mb-2">
-                                    <label class="col-form-label" for="recipient-name">Project Name</label>
+                                    <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputName') }}</label>
                                     <input class="form-control" id="recipient-name" name="name" type="text" />
                                 </div>
                                 <div class="mb-2">
-                                    <label class="col-form-label" for="recipient-name">Project Email</label>
+                                    <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputEmail') }}</label>
                                     <input class="form-control" id="recipient-name" name="email" type="text" />
                                 </div>
                                 <div class="mb-2">
-                                    <label class="col-form-label" for="recipient-name">Description</label>
+                                    <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputDescription') }}</label>
                                     <textarea class="form-control" name="description"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-2">
-                                            <label class="col-form-label" for="recipient-name">Start Date</label>
+                                            <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputStartDate') }}</label>
                                             <input type="date" class="form-control" name="start_date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-2">
-                                            <label class="col-form-label" for="recipient-name">End Date</label>
+                                            <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputEndDate') }}</label>
                                             <input type="date" class="form-control" name="end_date">
                                         </div>
                                     </div>
@@ -81,8 +81,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" type="submit" id="submit">Create</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">{{ __('static_data.project.modal.cancelBtn') }}</button>
+                        <button class="btn btn-primary" type="submit" id="submit">{{ __('static_data.project.modal.SubmitBtn') }}</button>
                     </div>
                 </form>
             </div>
@@ -93,11 +93,11 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="active-project-tab" data-bs-toggle="tab" href="#tab-active-project"
-                role="tab" aria-controls="tab-home" aria-selected="true">Active Project {{session()->get('locale')}}</a>
+                role="tab" aria-controls="tab-home" aria-selected="true">{{ __('static_data.project.activeTab') }} {{session()->get('locale')}}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab-inactive-project" role="tab"
-                aria-controls="tab-profile" aria-selected="false">Inactive Project {{ __('static_data.admin.titles') }}</a>
+                aria-controls="tab-profile" aria-selected="false">{{ __('static_data.project.inactiveTab') }} </a>
         </li>
 
     </ul>
@@ -114,11 +114,11 @@
                                             href="{{ route('service.dashboard', [$service->slug, base64_encode($service->id)]) }}">
                                             <div class="card-title">{{ $service->name }}</div>
                                         </a>
-                                        <p class="card-text">Demo project description</p>
+                                        <p class="card-text">{{ strlen($service->description) > 60 ? substr($service->description, 0 , 60).'...':substr($service->description, 0 , 60) }}</p>
                                     </div>
                                     <div class="col-md-4 text-end">
-                                        <button class="btn btn-danger">Edit</button>
-                                        <button class="btn btn-danger">Inactive</button>
+                                        <button class="btn btn-danger">{{ __('static_data.project.editBtn') }}</button>
+                                        <button class="btn btn-danger">{{ __('static_data.project.inactiveBtn') }}</button>
                                     </div>
                                 </div>
 
