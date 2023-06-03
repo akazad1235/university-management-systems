@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Permission\RolePermissionController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +53,10 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/store', [UserController::class, 'store'])->name('store');
     });
 
-    //services
-    Route::prefix('/service')->name('services.')->group(function(){
-        Route::get('/list', [ServiceController::class, 'index'])->name('service');
-    });
-    Route::prefix('/service')->name('services.')->group(function(){
-        Route::get('/list', [ServiceController::class, 'index'])->name('service');
+    //project
+    Route::prefix('/project')->name('project.')->group(function(){
+        Route::get('/list', [ProjectController::class, 'index']);
+        Route::post('/store', [ProjectController::class, 'store'])->name('store');
     });
     //dashboard
     Route::prefix('/{serviceName}')->name('service.')->group(function(){

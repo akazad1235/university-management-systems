@@ -41,49 +41,50 @@
                     <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-0">
-                    <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
-                        <h4 class="mb-1" id="modalExampleDemoLabel">Create a New Project </h4>
-                    </div>
-                    <div class="p-4 pb-0">
-                        <form action="" method="post">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-6"></div>
-                            </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="recipient-name">Project Name</label>
-                                <input class="form-control" id="recipient-name" name="name" type="text" />
-                            </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="recipient-name">Project Email</label>
-                                <input class="form-control" id="recipient-name" name="email" type="text" />
-                            </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="recipient-name">Description</label>
-                                <textarea class="form-control" name="description"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <label class="col-form-label" for="recipient-name">Start Date</label>
-                                        <input type="date" class="form-control" name="start_date">
+                <form action="{{route('project.store')}}" method="post" id="form">
+                    @csrf
+                    <div class="modal-body p-0">
+                        <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
+                            <h4 class="mb-1" id="modalExampleDemoLabel">Create a New Project </h4>
+                        </div>
+                        <div class="p-4 pb-0">
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="col-form-label" for="recipient-name">Project Name</label>
+                                    <input class="form-control" id="recipient-name" name="name" type="text" />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="col-form-label" for="recipient-name">Project Email</label>
+                                    <input class="form-control" id="recipient-name" name="email" type="text" />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="col-form-label" for="recipient-name">Description</label>
+                                    <textarea class="form-control" name="description"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-2">
+                                            <label class="col-form-label" for="recipient-name">Start Date</label>
+                                            <input type="date" class="form-control" name="start_date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-2">
+                                            <label class="col-form-label" for="recipient-name">End Date</label>
+                                            <input type="date" class="form-control" name="end_date">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <label class="col-form-label" for="recipient-name">End Date</label>
-                                        <input type="date" class="form-control" name="end_date">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="button">Create </button>
-                </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit" id="submit">Create</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -133,4 +134,58 @@
 
         </div>
     </div>
+    <script src="{{ asset('assets/js/jquery-3.7.0.min.js') }}"></script>
+    <script>
+        let inputs =  $("#form").find('input:input');
+        inputs.each(function (){
+            $(this).on('click', function (){
+
+            })
+        })
+
+        $("form").submit(function (e){
+            e.preventDefault();
+            let name =  $("input[name='name']",this).val();
+            let email =  $("input[name='email']",this).val();
+            let description =  $("textarea[name='description']",this).val();
+            let start_date =  $("input[name='start_date']",this).val();
+            let end_date =  $("input[name='end_date']",this).val();
+            let ajaxCallable = true;
+            inputs.each(function (){
+                if ($.trim($(this).val()) === '') {
+                    $(this).attr('class', 'form-control is-invalid')
+                   ajaxCallable = false;
+                }
+                if ($.trim($(this).val()) !== '') {
+                    $(this).attr('class', 'form-control')
+                    // alert('please input item name or amount');
+                }
+            })
+            if(ajaxCallable == true){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{route('project.store')}}",
+                    type: "post",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        name : name,
+                        email : email,
+                        description : description,
+                        start_date : start_date,
+                        end_date : end_date
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        location.reload()
+                    },
+                });
+            }
+
+
+
+        })
+
+    </script>
 @endsection
