@@ -134,12 +134,11 @@
 
         </div>
     </div>
-    <script src="{{ asset('assets/js/jquery-3.7.0.min.js') }}"></script>
-    <script>
+    @section('script')
+        <script>
         let inputs =  $("#form").find('input:input');
         inputs.each(function (){
             $(this).on('click', function (){
-
             })
         })
 
@@ -177,8 +176,13 @@
                         end_date : end_date
                     },
                     success: function (data) {
-                        console.log(data)
-                        location.reload()
+
+                        callSweetAlert('data saved success', 'success')//call sweetalert from app pages
+
+                        setTimeout(() => { //after success saved data then reload page
+                            location.reload()
+                        }, "2000");
+
                     },
                 });
             }
@@ -188,4 +192,5 @@
         })
 
     </script>
+    @endsection
 @endsection

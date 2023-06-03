@@ -715,6 +715,7 @@
     <script src="../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+
   </body>
 
 
