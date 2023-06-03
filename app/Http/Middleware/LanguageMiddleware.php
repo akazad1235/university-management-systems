@@ -16,8 +16,10 @@ class LanguageMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('locale')) {
+        if (session()->has('locale') && array_key_exists(session()->get('locale'), config('language'))) {
             App::setLocale(session()->get('locale'));
+        }else{
+            App::setLocale('jpn');
         }
         return $next($request);
     }

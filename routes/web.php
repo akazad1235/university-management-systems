@@ -56,6 +56,9 @@ Route::middleware(['auth'])->group(function(){
     Route::prefix('/service')->name('services.')->group(function(){
         Route::get('/list', [ServiceController::class, 'index'])->name('service');
     });
+    Route::prefix('/service')->name('services.')->group(function(){
+        Route::get('/list', [ServiceController::class, 'index'])->name('service');
+    });
     //dashboard
     Route::prefix('/{serviceName}')->name('service.')->group(function(){
         Route::get('/dashboard/{id}', [DashboardController::class, 'dashboard'])->name('dashboard');

@@ -29,7 +29,7 @@
 @section('mainContent')
     <div class="row pb-4 pt-2">
         <div class="col-12 text-end btn-lg">
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal">{{ __('staticText.projectCreate')  }}</button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal">{{ __('static_data.service.projectCreate')  }}</button>
         </div>
     </div>
 
@@ -46,16 +46,37 @@
                         <h4 class="mb-1" id="modalExampleDemoLabel">Create a New Project </h4>
                     </div>
                     <div class="p-4 pb-0">
-                        <form>
+                        <form action="" method="post">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                            </div>
                             <div class="mb-2">
                                 <label class="col-form-label" for="recipient-name">Project Name</label>
-                                <input class="form-control" id="recipient-name" type="text" />
+                                <input class="form-control" id="recipient-name" name="name" type="text" />
                             </div>
                             <div class="mb-2">
-                                <label class="col-form-label" for="recipient-name">Project Description</label>
-                                <input class="form-control" id="recipient-name" type="text" />
+                                <label class="col-form-label" for="recipient-name">Project Email</label>
+                                <input class="form-control" id="recipient-name" name="email" type="text" />
                             </div>
-
+                            <div class="mb-2">
+                                <label class="col-form-label" for="recipient-name">Description</label>
+                                <textarea class="form-control" name="description"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="recipient-name">Start Date</label>
+                                        <input type="date" class="form-control" name="start_date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="recipient-name">End Date</label>
+                                        <input type="date" class="form-control" name="end_date">
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -75,7 +96,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab-inactive-project" role="tab"
-                aria-controls="tab-profile" aria-selected="false">Inactive Project {{ __('staticText.title') }}</a>
+                aria-controls="tab-profile" aria-selected="false">Inactive Project {{ __('static_data.admin.titles') }}</a>
         </li>
 
     </ul>

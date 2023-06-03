@@ -193,7 +193,7 @@
                                     <span id="en" class="button_lang {{ session()->get('locale') == 'en' ? 'current_lang' : '' }}">EN</span>
                                 </td>
                                 {{-- <td class="tdlang"><span id="cn" class="button_lang">中文</span></td> --}}
-                                <td class="tdlang {{ session()->get('locale') == 'jpn' ? 'current_lang' : '' }}" onclick="langChange('jpn')"><span id="jp" class="button_lang">日本語</span></td>
+                                <td class="tdlang {{ session()->get('locale') !== 'en' ? 'current_lang' : '' }}" onclick="langChange('jpn')"><span id="jp" class="button_lang">日本語</span></td>
                             </tr>
                         </table>
                         {{-- <div class="translation english" id="translate">
