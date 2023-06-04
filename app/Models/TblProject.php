@@ -10,5 +10,5 @@ class TblProject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'project_code', 'slug', 'description', 'start_date', 'end_date', 'remarks', 'created_by', 'updated_by'];
+    protected $fillable = ['name', 'email', 'project_code', 'slug', 'description', 'start_date', 'end_date', 'remarks','status', 'created_by', 'updated_by'];
 }

@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/list', [ProjectController::class, 'index']);
         Route::post('/store', [ProjectController::class, 'store'])->name('store');
         Route::post('/update', [ProjectController::class, 'update'])->name('update');
+        Route::get('/inactive/{id}', [ProjectController::class, 'inactive'])->name('inactive');
     });
     //dashboard
     Route::prefix('/{serviceName}')->name('service.')->group(function(){

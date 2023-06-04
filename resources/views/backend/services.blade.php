@@ -128,7 +128,7 @@
                                         >
                                             {{ __('static_data.project.editBtn') }}
                                         </button>
-                                        <button class="btn btn-danger">{{ __('static_data.project.inactiveBtn') }}</button>
+                                        <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($service->id))  }}">{{ __('static_data.project.inactiveBtn') }}</a>
                                     </div>
                                 </div>
 
@@ -140,8 +140,28 @@
 
         </div>
         <div class="tab-pane fade" id="tab-inactive-project" role="tabpanel" aria-labelledby="profile-tab">
-            <h1>Inactive project</h1>
+            <div class="row" data-bs-theme="light">
+                @foreach ($inactive as $project)
+                    <div class="col-12 mb-4">
+                        <div class="card text-white bg-success">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p>
+                                            <div class="card-title">{{ $project->name }}</div>
+                                        </p>
+                                        <p class="card-text">{{ strlen($project->description) > 60 ? substr($project->description, 0 , 60).'...':substr($project->description, 0 , 60) }}</p>
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($project->id))  }}">{{ __('static_data.project.inactiveBtn') }}</a>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
     @section('script')

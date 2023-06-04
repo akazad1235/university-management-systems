@@ -9,8 +9,9 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects =  TblProject::get();
-        return view('backend.services', ['services' => $projects]);
+        $active =  TblProject::where('status', 'active')->get();
+        $inactive =  TblProject::where('status', 'inactive')->get();
+        return view('backend.services', ['services' => $active, 'inactive' => $inactive]);
     }
     public function store(Request $request)
     {
@@ -37,9 +38,9 @@ class ProjectController extends Controller
         }
         return $request->all();
     }
-    public function edit($id){
-
-    }
+    /*
+     *
+     */
     public function update(Request $request){
         try {
             $project =  TblProject::findOrFail($request->id);
@@ -57,7 +58,19 @@ class ProjectController extends Controller
         }catch (\Exception $ex){
             return response()->json(['status' => 404, 'msg' => $ex->getMessage(), 'data' => null]);
         }
-
-
+    }
+    public function inactive(string $id){
+        try {
+            $project = TblProject::findOrFail(base64_decode($id));
+            if ($project){
+                $project->update([
+                    'status' => 'inactive',
+                ]);
+                return redirect()->back();
+            }
+            return response()->json(['status' =>200, 'msg' => 'data updated success', 'data' => null]);
+        }catch (\Exception $ex){
+            return response()->json(['status' => 404, 'msg' => $ex->getMessage(), 'data' => null]);
+        }
     }
 }
