@@ -47,7 +47,7 @@
                         <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
                             <h4 class="mb-1" id="modalExampleDemoLabel"> {{ __('static_data.project.modal.title') }}  </h4>
                         </div>
-                        <input type="text" value="0" id="project_id">
+                        <input type="hidden" value="0" id="project_id">
                         <div class="p-4 pb-0">
                                 <div class="row">
                                     <div class="col-md-6"></div>
@@ -261,13 +261,13 @@
             let start_date = $(this).data('start_date');
             let end_date = $(this).data('end_date');
 
+
             $('#project_id').val(id)
             $('#name').val(name)
             $('#email').val(email)
             $('#description').val(description)
             $('#start_date').val(start_date)
             $('#end_date').val(end_date)
-
 
         })
 

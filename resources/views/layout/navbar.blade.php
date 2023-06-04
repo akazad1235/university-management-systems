@@ -335,9 +335,7 @@
     <script>
         function langChange(type){
             var url = "{{ route('lang.change') }}";
-            alert('test')
             window.location.href = url + "?lang="+ type;
         }
-
     </script>
 @endsection
