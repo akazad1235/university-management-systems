@@ -103,6 +103,7 @@
 
     </ul>
     <div class="tab-content border border-top-0 p-3" id="myTabContent">
+        <!-- ***** active tab ***** -->
         <div class="tab-pane fade show active" id="tab-active-project" role="tabpanel" aria-labelledby="home-tab">
             <div class="row" data-bs-theme="light">
                 @foreach ($services as $service)
@@ -117,6 +118,7 @@
                                         </a>
                                         <p class="card-text">{{ strlen($service->description) > 60 ? substr($service->description, 0 , 60).'...':substr($service->description, 0 , 60) }}</p>
                                     </div>
+                                    @hasrole('admin|super-admin')
                                     <div class="col-md-4 text-end">
                                         <button class="btn btn-warning update-project" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal"
                                         data-id="{{ $service->id}}"
@@ -130,6 +132,7 @@
                                         </button>
                                         <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($service->id))  }}">{{ __('static_data.project.inactiveBtn') }}</a>
                                     </div>
+                                    @endhasrole
                                 </div>
 
                             </div>
@@ -139,6 +142,7 @@
             </div>
 
         </div>
+{{--        inactive tab--}}
         <div class="tab-pane fade" id="tab-inactive-project" role="tabpanel" aria-labelledby="profile-tab">
             <div class="row" data-bs-theme="light">
                 @foreach ($inactive as $project)
@@ -152,9 +156,11 @@
                                         </p>
                                         <p class="card-text">{{ strlen($project->description) > 60 ? substr($project->description, 0 , 60).'...':substr($project->description, 0 , 60) }}</p>
                                     </div>
+                                    @hasrole('admin|super-admin')
                                     <div class="col-md-4 text-end">
                                         <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($project->id))  }}">{{ __('static_data.project.inactiveBtn') }}</a>
                                     </div>
+                                    @endhasrole
                                 </div>
 
                             </div>
