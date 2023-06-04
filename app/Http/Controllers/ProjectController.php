@@ -37,4 +37,27 @@ class ProjectController extends Controller
         }
         return $request->all();
     }
+    public function edit($id){
+
+    }
+    public function update(Request $request){
+        try {
+            $project =  TblProject::findOrFail($request->id);
+            if($project){
+                $project->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'slug' => str_replace(' ', '_', $request->name),
+                    'description' => $request->description,
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date,
+                ]);
+            }
+            return response()->json(['status' =>200, 'msg' => 'data updated success', 'data' => null]);
+        }catch (\Exception $ex){
+            return response()->json(['status' => 404, 'msg' => $ex->getMessage(), 'data' => null]);
+        }
+
+
+    }
 }

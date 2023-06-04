@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function(){
     Route::prefix('/project')->name('project.')->group(function(){
         Route::get('/list', [ProjectController::class, 'index']);
         Route::post('/store', [ProjectController::class, 'store'])->name('store');
+        Route::post('/update', [ProjectController::class, 'update'])->name('update');
     });
     //dashboard
     Route::prefix('/{serviceName}')->name('service.')->group(function(){

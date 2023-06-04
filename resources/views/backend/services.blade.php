@@ -47,33 +47,34 @@
                         <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
                             <h4 class="mb-1" id="modalExampleDemoLabel"> {{ __('static_data.project.modal.title') }}  </h4>
                         </div>
+                        <input type="text" value="0" id="project_id">
                         <div class="p-4 pb-0">
                                 <div class="row">
                                     <div class="col-md-6"></div>
                                 </div>
                                 <div class="mb-2">
                                     <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputName') }}</label>
-                                    <input class="form-control" id="recipient-name" name="name" type="text" />
+                                    <input class="form-control" id="name" name="name" type="text" />
                                 </div>
                                 <div class="mb-2">
                                     <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputEmail') }}</label>
-                                    <input class="form-control" id="recipient-name" name="email" type="text" />
+                                    <input class="form-control" id="email" name="email" type="text" />
                                 </div>
                                 <div class="mb-2">
                                     <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputDescription') }}</label>
-                                    <textarea class="form-control" name="description"></textarea>
+                                    <textarea class="form-control" id="description" name="description"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-2">
                                             <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputStartDate') }}</label>
-                                            <input type="date" class="form-control" name="start_date">
+                                            <input type="date" class="form-control" id="start_date" name="start_date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-2">
                                             <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputEndDate') }}</label>
-                                            <input type="date" class="form-control" name="end_date">
+                                            <input type="date" class="form-control" id="end_date" name="end_date">
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +118,16 @@
                                         <p class="card-text">{{ strlen($service->description) > 60 ? substr($service->description, 0 , 60).'...':substr($service->description, 0 , 60) }}</p>
                                     </div>
                                     <div class="col-md-4 text-end">
-                                        <button class="btn btn-danger">{{ __('static_data.project.editBtn') }}</button>
+                                        <button class="btn btn-warning update-project" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal"
+                                        data-id="{{ $service->id}}"
+                                        data-name="{{ $service->name}}"
+                                        data-email="{{ $service->email}}"
+                                        data-description="{{ $service->description}}"
+                                        data-start_date="{{ date("Y-m-d", strtotime($service->start_date))}}"
+                                        data-end_date="{{ date("Y-m-d", strtotime($service->end_date)) }}"
+                                        >
+                                            {{ __('static_data.project.editBtn') }}
+                                        </button>
                                         <button class="btn btn-danger">{{ __('static_data.project.inactiveBtn') }}</button>
                                     </div>
                                 </div>
@@ -161,32 +171,82 @@
                 }
             })
             if(ajaxCallable == true){
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "{{route('project.store')}}",
-                    type: "post",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        name : name,
-                        email : email,
-                        description : description,
-                        start_date : start_date,
-                        end_date : end_date
-                    },
-                    success: function (data) {
+                if($('#project_id').val() > 0){
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{route('project.update')}}",
+                        type: "post",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id : $('#project_id').val(),
+                            name : name,
+                            email : email,
+                            description : description,
+                            start_date : start_date,
+                            end_date : end_date
+                        },
+                        success: function (data) {
+                            if(data.status === 200){
+                                callSweetAlert(data.msg, 'success')//call sweetalert from app pages
+                                setTimeout(() => { //after success saved data then reload page
+                                    location.reload()
+                                }, "2000");
+                            }else{
+                                callSweetAlert(data.msg, 'error')
+                            }
+                        },
+                    });
+                }else{
 
-                        callSweetAlert('data saved success', 'success')//call sweetalert from app pages
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{route('project.store')}}",
+                        type: "post",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            name : name,
+                            email : email,
+                            description : description,
+                            start_date : start_date,
+                            end_date : end_date
+                        },
+                        success: function (data) {
+                            if(data.status === 200){
+                                callSweetAlert(data.msg, 'success')//call sweetalert from app pages
+                                setTimeout(() => { //after success saved data then reload page
+                                    location.reload()
+                                }, "2000");
+                            }else{
+                                callSweetAlert(data.msg, 'error')
+                            }
 
-                        setTimeout(() => { //after success saved data then reload page
-                            location.reload()
-                        }, "2000");
-
-                    },
-                });
+                        },
+                        error: function (error){
+                            callSweetAlert('something wrong!', 'error')
+                        }
+                    });
+                }
             }
+        })
+        //update data
+        $('.update-project').on('click', function (e){
+            let id = $(this).data('id');
+            let name = $(this).data('name');
+            let email = $(this).data('email');
+            let description = $(this).data('description');
+            let start_date = $(this).data('start_date');
+            let end_date = $(this).data('end_date');
 
+            $('#project_id').val(id)
+            $('#name').val(name)
+            $('#email').val(email)
+            $('#description').val(description)
+            $('#start_date').val(start_date)
+            $('#end_date').val(end_date)
 
 
         })
