@@ -9,8 +9,8 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $active =  TblProject::where('status', 'active')->get();
-        $inactive =  TblProject::where('status', 'inactive')->get();
+        $active =  TblProject::where('status', 'active')->orderBy('id', 'desc')->get();
+        $inactive =  TblProject::where('status', 'inactive')->orderBy('id', 'desc')->get();
         return view('backend.services', ['services' => $active, 'inactive' => $inactive]);
     }
     public function store(Request $request)
@@ -33,10 +33,10 @@ class ProjectController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
             ]);
+            return response()->json(['status' =>200, 'msg' => 'data saved success', 'data' => null]);
         }catch (\Exception $ex){
-            return $ex->getMessage();
+            return response()->json(['status' => 404, 'msg' => $ex->getMessage(), 'data' => null]);
         }
-        return $request->all();
     }
     /*
      *
