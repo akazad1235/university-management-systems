@@ -66,7 +66,12 @@ class ProjectController extends Controller
                 $project->update([
                     'status' => 'inactive',
                 ]);
-                return redirect()->back();
+                $notifications = array(
+                    'message' => 'Post created successfully!',
+                    'alert-type' => 'success'
+                );
+
+                return redirect()->back()->with(['message' => 'seccuss']);
             }
             return response()->json(['status' =>200, 'msg' => 'data updated success', 'data' => null]);
         }catch (\Exception $ex){

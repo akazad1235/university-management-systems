@@ -175,6 +175,8 @@
         let inputs =  $("#form").find('input:input');
         inputs.each(function (){
             $(this).on('click', function (){
+
+                console.log('teeee')
             })
         })
 
@@ -258,8 +260,32 @@
                 }
             }
         })
+        function showToastr(type, title, message) {
+            let body;
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": 0,
+                "onclick": null,
+                "onCloseClick": null,
+                "extendedTimeOut": 0,
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "tapToDismiss": false
+            };
+
+        }
         //update data
         $('.update-project').on('click', function (e){
+            toastr.success('We do have the Kapua suite available.', '', {timeOut: 2000, progressBar: true})
             let id = $(this).data('id');
             let name = $(this).data('name');
             let email = $(this).data('email');
