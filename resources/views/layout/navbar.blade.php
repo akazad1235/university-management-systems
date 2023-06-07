@@ -99,7 +99,23 @@
                         </a>
                         <ul class="nav collapse show" id="dashboard">
                             <li class="nav-item"><a class="nav-link active" href="/">
-                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Project</span>
+                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Project</span>
+                                    </div>
+                                </a><!-- more inner pages-->
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <!-- parent pages-->
+                        <a class="nav-link dropdown-indicator" href="#dashboard" role="button"
+                           data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="fas fa-chart-pie"></span></span><span
+                                    class="nav-link-text ps-1">UI Management</span></div>
+                        </a>
+                        <ul class="nav collapse show" id="dashboard">
+                            <li class="nav-item"><a class="nav-link active" href="/">
+                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Login</span>
                                     </div>
                                 </a><!-- more inner pages-->
                             </li>

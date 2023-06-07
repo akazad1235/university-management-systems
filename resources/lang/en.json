@@ -1,0 +1,9 @@
+{
+    "Greeting": "Hello ja!",
+    "goodbye": "Goodbye!",
+    "common": {
+        "greeting": "Hola japan!",
+        "goodbye": "Adis",
+        "new_key3": "New translation update key3 japa"
+    }
+}

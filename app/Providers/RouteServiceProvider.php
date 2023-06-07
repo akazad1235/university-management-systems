@@ -36,6 +36,10 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+            //for ui management only
+            Route::middleware('web')
+                ->prefix('ui')
+                ->group(base_path('routes/ui.php'));
         });
     }
 }

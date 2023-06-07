@@ -1,0 +1,12 @@
+{
+    "Greeting": "Hello ja!",
+    "goodbye": "Goodbye!",
+    "common": {
+        "greeting": "tyr",
+        "goodbye": "toure",
+        "new_key4": "New translation update key4 japa"
+    },
+    "common1": {
+        "key1": "New translation update new common 1 japa"
+    }
+}
