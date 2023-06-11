@@ -19,7 +19,7 @@ class LanguageMiddleware
         if (session()->has('locale') && array_key_exists(session()->get('locale'), config('language'))) {
             App::setLocale(session()->get('locale'));
         }else{
-            App::setLocale('jpn');
+            App::setLocale('ja');
         }
         return $next($request);
     }

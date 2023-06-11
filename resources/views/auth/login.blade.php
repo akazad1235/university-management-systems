@@ -12,7 +12,7 @@
                 <div class="card-body p-4 p-sm-5">
                     <div class="row flex-between-center mb-2">
                         <div class="col-12 text-center mb-3">
-                            <h4>Log in</h4>
+                            <h4>{{ __('login.LOGIN_TITLE')  }}</h4>
                         </div>
                         {{-- <div class="col-auto fs--1 text-600">
                             <span class="mb-0 undefined">or</span> <span><a href="{{ route('register') }}">Create an
@@ -22,10 +22,10 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
-                            <input class="form-control" type="email" name="email" placeholder="Email address" />
+                            <input class="form-control" type="email" name="email" placeholder="{{ __('login.LOGIN_EMAIL')  }}" />
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" name="password" type="password" placeholder="Password" />
+                            <input class="form-control" name="password" type="password" placeholder="{{ __('login.PASSWORD')  }}" />
                         </div>
                         {{-- <div class="row flex-between-center">
                             <div class="col-auto">
@@ -38,8 +38,7 @@
                                     Password?</a></div>
                         </div> --}}
                         <div class="mb-3 pt-1"><button class="btn btn-primary d-block w-100 mt-3" type="submit"
-                                name="submit">Log
-                                in</button></div>
+                                name="submit">{{ __('login.SUBMIT')  }}</button></div>
                     </form>
                     {{-- <div class="position-relative mt-4">
                         <hr />
