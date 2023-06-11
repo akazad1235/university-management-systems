@@ -114,7 +114,7 @@
                                     class="nav-link-text ps-1">UI Management</span></div>
                         </a>
                         <ul class="nav collapse show" id="dashboard">
-                            <li class="nav-item"><a class="nav-link active" href="/">
+                            <li class="nav-item"><a class="nav-link active" href="{{route('ui.login')}}">
                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Login</span>
                                     </div>
                                 </a><!-- more inner pages-->
@@ -209,7 +209,7 @@
                                     <span id="en" class="button_lang {{ session()->get('locale') == 'en' ? 'current_lang' : '' }}">EN</span>
                                 </td>
                                 {{-- <td class="tdlang"><span id="cn" class="button_lang">中文</span></td> --}}
-                                <td class="tdlang {{ session()->get('locale') !== 'en' ? 'current_lang' : '' }}" onclick="langChange('jpn')"><span id="jp" class="button_lang">日本語</span></td>
+                                <td class="tdlang {{ session()->get('locale') !== 'en' ? 'current_lang' : '' }}" onclick="langChange('ja')"><span id="jp" class="button_lang">日本語</span></td>
                             </tr>
                         </table>
                         {{-- <div class="translation english" id="translate">

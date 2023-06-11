@@ -29,7 +29,7 @@
 @section('mainContent')
     <div class="row pb-4 pt-2">
         <div class="col-12 text-end btn-lg">
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal"> {{ __('common')['greeting'] }}</button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#create-project-modal"> create new project</button>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
                     @csrf
                     <div class="modal-body p-0">
                         <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
-                            <h4 class="mb-1" id="modalExampleDemoLabel"> {{ __('static_data.project.modal.title') }}  </h4>
+                            <h4 class="mb-1" id="modalExampleDemoLabel"> title  </h4>
                         </div>
                         <input type="hidden" value="0" id="project_id">
                         <div class="p-4 pb-0">
@@ -53,27 +53,27 @@
                                     <div class="col-md-6"></div>
                                 </div>
                                 <div class="mb-2">
-                                    <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputName') }}</label>
+                                    <label class="col-form-label" for="recipient-name">project name</label>
                                     <input class="form-control" id="name" name="name" type="text" />
                                 </div>
                                 <div class="mb-2">
-                                    <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputEmail') }}</label>
+                                    <label class="col-form-label" for="recipient-name">email</label>
                                     <input class="form-control" id="email" name="email" type="text" />
                                 </div>
                                 <div class="mb-2">
-                                    <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputDescription') }}</label>
+                                    <label class="col-form-label" for="recipient-name">description</label>
                                     <textarea class="form-control" id="description" name="description"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-2">
-                                            <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputStartDate') }}</label>
+                                            <label class="col-form-label" for="recipient-name">start date</label>
                                             <input type="date" class="form-control" id="start_date" name="start_date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-2">
-                                            <label class="col-form-label" for="recipient-name">{{ __('static_data.project.modal.inputEndDate') }}</label>
+                                            <label class="col-form-label" for="recipient-name">end date</label>
                                             <input type="date" class="form-control" id="end_date" name="end_date">
                                         </div>
                                     </div>
@@ -82,8 +82,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">{{ __('static_data.project.modal.cancelBtn') }}</button>
-                        <button class="btn btn-primary" type="submit" id="submit">{{ __('static_data.project.modal.SubmitBtn') }}</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">cancel button</button>
+                        <button class="btn btn-primary" type="submit" id="submit">submit</button>
                     </div>
                 </form>
             </div>
@@ -94,11 +94,11 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="active-project-tab" data-bs-toggle="tab" href="#tab-active-project"
-                role="tab" aria-controls="tab-home" aria-selected="true">{{ __('static_data.project.activeTab') }} {{session()->get('locale')}}</a>
+                role="tab" aria-controls="tab-home" aria-selected="true">active tab {{session()->get('locale')}}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab-inactive-project" role="tab"
-                aria-controls="tab-profile" aria-selected="false">{{ __('static_data.project.inactiveTab') }} </a>
+                aria-controls="tab-profile" aria-selected="false">inactive tab </a>
         </li>
 
     </ul>
@@ -128,9 +128,9 @@
                                         data-start_date="{{ date("Y-m-d", strtotime($service->start_date))}}"
                                         data-end_date="{{ date("Y-m-d", strtotime($service->end_date)) }}"
                                         >
-                                            {{ __('static_data.project.editBtn') }}
+                                            Edit
                                         </button>
-                                        <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($service->id))  }}">{{ __('static_data.project.inactiveBtn') }}</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($service->id))  }}">inactive project</a>
                                     </div>
                                     @endhasrole
                                 </div>
@@ -158,7 +158,7 @@
                                     </div>
                                     @hasrole('admin|super-admin')
                                     <div class="col-md-4 text-end">
-                                        <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($project->id))  }}">{{ __('static_data.project.inactiveBtn') }}</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Are you sure in active the project')" href="{{ route('project.inactive', base64_encode($project->id))  }}">Inactive</a>
                                     </div>
                                     @endhasrole
                                 </div>

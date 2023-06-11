@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Storage;
 
 class LoginUiController extends Controller
 {
-    public function index(){
+    public function login(){
+
 
 //        $path = resource_path('lang/jpn.json');
 //        $jsonContent = file_get_contents($path);
@@ -23,6 +24,10 @@ class LoginUiController extends Controller
 //        File::put($fileStorePath, $data);
       //  Storage::disk('ui')->put('file1.json', $data);
 
-        return view('backend.pages.ui_management.login.create');
+        return view('backend.pages.ui_management.login.create', );
+    }
+    public function store(Request $request){
+       return $request->all();
+
     }
 }

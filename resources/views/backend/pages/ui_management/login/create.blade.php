@@ -10,45 +10,68 @@
         </div>
     </div>
 
-    {{-- Add Project Modal --}}
+    {{-- Add ui login Modal --}}
     <div class="modal fade" id="create-project-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content position-relative">
                 <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
                     <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
                             data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="post" id="form">
+                <form action="{{ route('ui.login.store') }}" method="post" id="form">
+                    @csrf
                     <div class="modal-body p-0">
                         <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
                             <h4 class="mb-1" id="modalExampleDemoLabel"> Create login UI  </h4>
                         </div>
                         <input type="hidden" value="0" id="project_id">
-                        <div class="p-4 pb-0">
-                            <div class="row">
-                                <div class="col-md-6"></div>
+                        <div class="row p-3">
+                            <div class="col-md-6">
+                                <div class="p-1 pb-0">
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="login_title_ja">{{ __('login.LOGIN_TITLE') }}(en)</label>
+                                        <input class="form-control" id="login_title_ja" name="login_title_ja" type="text" placeholder="{{ __('login.LOGIN_TITLE') }}(en)" />
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="email_address_en">{{ __('login.EMAIL_ADDRESS') }}(en)</label>
+                                        <input class="form-control" id="email_address_en" name="email_address_en" type="text" placeholder="{{ __('login.EMAIL_ADDRESS') }}(en)"/>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="password_en">{{ __('login.PASSWORD') }}(en)</label>
+                                        <input class="form-control" id="password_en" name="password_en" type="text" placeholder="{{ __('login.PASSWORD') }}(en)"/>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="login_btn_en">{{ __('login.SUBMIT') }}(en)</label>
+                                        <input class="form-control" id="login_btn_en" name="login_btn_en" type="text" placeholder="{{ __('login.SUBMIT') }}(en)"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="title">Title</label>
-                                <input class="form-control" id="title" name="title" type="text" placeholder="title" />
-                            </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="label_name">Label Name</label>
-                                <input class="form-control" id="label_name" name="label_name" type="text" placeholder="label name"/>
-                            </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="label_password">Label Password</label>
-                                <input class="form-control" id="label_password" name="label_password" type="text" placeholder="password label"/>
-                            </div>
-                            <div class="mb-2">
-                                <label class="col-form-label" for="login_btn">Login Button Name</label>
-                                <input class="form-control" id="login_btn" name="login_btn" type="text" placeholder="login button name"/>
+                            <div class="col-md-6">
+                                <div class="p-1 pb-0">
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="title">{{ __('login.LOGIN_TITLE') }}(ja)</label>
+                                        <input class="form-control" id="title" name="login_title_ja" type="text" placeholder="{{ __('login.LOGIN_TITLE') }}(ja)" />
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="email_add">{{ __('login.EMAIL_ADDRESS') }}(ja)</label>
+                                        <input class="form-control" id="email_add" name="email_address_ja" type="text" placeholder="{{ __('login.EMAIL_ADDRESS') }}(ja)"/>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="password">{{ __('login.PASSWORD') }}(ja)</label>
+                                        <input class="form-control" id="password" name="password_ja" type="text" placeholder="{{ __('login.PASSWORD') }}(ja)"/>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="login_btn_ja">{{ __('login.SUBMIT') }}</label>
+                                        <input class="form-control" id="login_btn_ja" name="login_btn_ja" type="text" placeholder="{{ __('login.SUBMIT') }}"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">{{ __('static_data.project.modal.cancelBtn') }}</button>
-                        <button class="btn btn-primary" type="submit" id="submit">{{ __('static_data.project.modal.SubmitBtn') }}</button>
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">{{ __('login.CANCEL') }}</button>
+
+                        <button class="btn btn-primary" type="submit" id="submit">{{ __('login.SUBMIT') }}</button>
                     </div>
                 </form>
             </div>
@@ -106,115 +129,6 @@
         </div>
     </div>
 @section('script')
-    <script>
-        let inputs =  $("#form").find('input:input');
-        inputs.each(function (){
-            $(this).on('click', function (){
 
-                console.log('teeee')
-            })
-        })
-
-        $("form").submit(function (e){
-            e.preventDefault();
-            let name =  $("input[name='name']",this).val();
-            let email =  $("input[name='email']",this).val();
-            let description =  $("textarea[name='description']",this).val();
-            let start_date =  $("input[name='start_date']",this).val();
-            let end_date =  $("input[name='end_date']",this).val();
-            let ajaxCallable = true;
-            inputs.each(function (){
-                if ($.trim($(this).val()) === '') {
-                    $(this).attr('class', 'form-control is-invalid')
-                    ajaxCallable = false;
-                }
-                if ($.trim($(this).val()) !== '') {
-                    $(this).attr('class', 'form-control')
-                    // alert('please input item name or amount');
-                }
-            })
-            if(ajaxCallable == true){
-                if($('#project_id').val() > 0){
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: "{{route('project.update')}}",
-                        type: "post",
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            id : $('#project_id').val(),
-                            name : name,
-                            email : email,
-                            description : description,
-                            start_date : start_date,
-                            end_date : end_date
-                        },
-                        success: function (data) {
-                            if(data.status === 200){
-                                callSweetAlert(data.msg, 'success')//call sweetalert from app pages
-                                setTimeout(() => { //after success saved data then reload page
-                                    location.reload()
-                                }, "2000");
-                            }else{
-                                callSweetAlert(data.msg, 'error')
-                            }
-                        },
-                    });
-                }else{
-
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: "{{route('project.store')}}",
-                        type: "post",
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            name : name,
-                            email : email,
-                            description : description,
-                            start_date : start_date,
-                            end_date : end_date
-                        },
-                        success: function (data) {
-                            if(data.status === 200){
-                                callSweetAlert(data.msg, 'success')//call sweetalert from app pages
-                                setTimeout(() => { //after success saved data then reload page
-                                    location.reload()
-                                }, "2000");
-                            }else{
-                                callSweetAlert(data.msg, 'error')
-                            }
-
-                        },
-                        error: function (error){
-                            callSweetAlert('something wrong!', 'error')
-                        }
-                    });
-                }
-            }
-        })
-        //update data
-        $('.update-project').on('click', function (e){
-            toastr.success('We do have the Kapua suite available.', '', {timeOut: 2000, progressBar: true})
-            let id = $(this).data('id');
-            let name = $(this).data('name');
-            let email = $(this).data('email');
-            let description = $(this).data('description');
-            let start_date = $(this).data('start_date');
-            let end_date = $(this).data('end_date');
-
-
-            $('#project_id').val(id)
-            $('#name').val(name)
-            $('#email').val(email)
-            $('#description').val(description)
-            $('#start_date').val(start_date)
-            $('#end_date').val(end_date)
-
-        })
-
-    </script>
 @endsection
 @endsection
