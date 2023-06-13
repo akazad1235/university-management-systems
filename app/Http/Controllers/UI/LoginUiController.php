@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\UI;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Ui\LoginUiRequest;
 use Illuminate\Http\Request;
 use File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse;
+
 
 class LoginUiController extends Controller
 {
@@ -26,8 +30,18 @@ class LoginUiController extends Controller
 
         return view('backend.pages.ui_management.login.create', );
     }
-    public function store(Request $request){
-       return $request->all();
+    public function store(LoginUiRequest $request){
+//        $validator = Validator::make($request->all(), $request->rules());
+//        if ($validator->fails()) {
+//            return 'errororlrkjldskjfldskjflk';
+//        }
+
+
+        return 'okkkkkkkk';
+
+
 
     }
+
+
 }

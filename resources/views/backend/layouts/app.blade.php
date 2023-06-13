@@ -3,12 +3,13 @@
 
 
 <!-- Mirrored from prium.github.io/falcon/v3.16.0/dashboard/project-management.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 09 Apr 2023 05:34:15 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
