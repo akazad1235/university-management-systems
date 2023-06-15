@@ -8,7 +8,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 use App\Traits\ResponseTrait;
 
-class LoginUiRequest extends FormRequest
+class ProjectDevStringRequest extends FormRequest
 {
     use ResponseTrait;
     /**
@@ -24,34 +24,23 @@ class LoginUiRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'login_title_en' => 'required|max:50',
-            'email_address_en' => 'required',
-            'password_en' => 'required',
-            'login_btn_en' => 'required',
-            'login_title_ja' => 'required',
-            'email_address_ja' => 'required',
-            'password_ja' => 'required',
-            'login_btn_ja' => 'required',
+            'key_name' => 'unique:tbl_ui_strings,key_name|required',
+            'ja' => 'required',
+            'en' => 'required',
         ];
     }
-
-    /**
-     * @return string[]
-     */
     public function messages()
     {
         return [
-            'login_title_en.required' => "The :attribute ". __('ui/validation/login.loginTitle'),
-            'login_title_en.max' => "The :attribute ". __('ui/validation/login.loginTitleMax'),
+            'key_name.required' => 'The :attribute'."must not empty",
+            'key_name.unique' => 'The :attribute'."key value has been duplicated",
+            'ja.required' => 'The :attribute'."must not empty",
+            'en.required' => 'The :attribute'."must not empty",
         ];
     }
-//    protected function failedValidation(Validator $validator)
-//    {
-//        throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
-//    }
     protected function failedValidation(Validator $validator)
     {
 

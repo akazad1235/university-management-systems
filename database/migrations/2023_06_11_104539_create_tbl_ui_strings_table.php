@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('tbl_ui_strings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id');
-            $table->string('key_name');
-            $table->string('en')->nullable();
-            $table->string('ja')->nullable();
+            $table->foreignId('project_id')->nullable();
+            $table->string('key_name')->unique();
+            $table->string('en');
+            $table->string('ja');
+            $table->string('type');
             $table->timestamps();
         });
     }

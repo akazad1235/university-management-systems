@@ -13,7 +13,7 @@
       * @param $status_code
       * @return JsonResponse
       */
-     public function responseSuccess(array|null $data, string $message = "successful", $status_code = null)
+     public function responseSuccess(array|object|null $data, string $message = "successful", $status_code = null)
      {
          return response()->json([
              'status' => true,

@@ -105,6 +105,7 @@
                             </li>
                         </ul>
                     </li>
+                    <!--********* UI Management *************-->
                     <li class="nav-item">
                         <!-- parent pages-->
                         <a class="nav-link dropdown-indicator" href="#dashboard" role="button"
@@ -114,13 +115,27 @@
                                     class="nav-link-text ps-1">UI Management</span></div>
                         </a>
                         <ul class="nav collapse show" id="dashboard">
-                            <li class="nav-item"><a class="nav-link active" href="{{route('ui.login')}}">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{route('ui.login')}}">
                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Login</span>
                                     </div>
-                                </a><!-- more inner pages-->
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{route('ui.project.index')}}">
+                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Project</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{route('ui.project.dev.setting.index')}}">
+                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Project Dev Setting</span>
+                                    </div>
+                                </a>
                             </li>
                         </ul>
                     </li>
+                    <!--********* End UI Management *************-->
                 </ul>
             </div>
         </div>
