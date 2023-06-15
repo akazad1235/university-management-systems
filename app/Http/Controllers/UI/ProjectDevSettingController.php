@@ -13,26 +13,48 @@ class ProjectDevSettingController extends Controller
 {
     use ResponseTrait;
     public function index(){
+        //get all ui dev string without any project
+        $uiDevStrings = TblUiString::where('project_id', null)->get();
 
-        return view('backend.pages.ui_management.project.create_project_dev_string');
+        return view('backend.pages.ui_management.project.create_project_dev_string', ['uiDevStrings' => $uiDevStrings]);
     }
     public function store(ProjectDevStringRequest $request){
 
-        $keyName = str_replace(' ', '_', strtoupper($request->key_name));
-        try {
-           $data =  TblUiString::create([
-                'key_name' => $keyName,
-                'ja' => $request->ja,
-                'en' => $request->en,
-            ]);
-           if($data){
-              return $this->responseSuccess($data, 'data has been successfully done', 201);
-           }else{
-               throw new Exception('something wrong', 400);
-           }
-        }catch (\Exception $ex){
-           return $this->responseError($ex->getMessage(), 'something wrong', $ex->getCode());
+        if($request->type === 'update'){
+            try {
+                $uiString = TblUiString::findOrFail($request->id);
+                $result = $uiString->update([
+                    'ja' => $request->ja,
+                    'en' => $request->en,
+                ]);
+                if($result){
+                    return $this->responseSuccess(null,'data has been successfully updated', 201);
+                }else{
+                    throw new Exception('something wrong', 400);
+                }
+            }catch (\Exception $ex){
+                return $this->responseError($ex->getMessage(), 'something wrong', $ex->getCode());
+            }
+
+        }else{
+            $keyName = str_replace(' ', '_', strtoupper($request->key_name));
+            try {
+                $data =  TblUiString::create([
+                    'key_name' => $keyName,
+                    'ja' => $request->ja,
+                    'en' => $request->en,
+                ]);
+                if($data){
+                    return $this->responseSuccess($data, 'data has been successfully done', 201);
+                }else{
+                    throw new Exception('something wrong', 400);
+                }
+            }catch (\Exception $ex){
+                return $this->responseError($ex->getMessage(), 'something wrong', $ex->getCode());
+            }
+
         }
+
 
 
         return 'ok';

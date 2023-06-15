@@ -98,19 +98,22 @@
                       </tr>
                     </thead>
                     <tbody class="list" id="dev-string-list">
-                      <tr>
-                        <td class="name">
-                            <input type="text">
-                        </td>
-                        <td class="japan">
-                            <input  type="text" value="azad">
-                        </td>
-                        <td class="english">
-                            <input type="text">
-                        </td>
-                        <td>project tst</td>
-                        <td class="text-center"><span class="text-500 fas fa-edit"></span></td>
-                      </tr>
+                        @foreach ($uiDevStrings as $item)
+                        <tr>
+                            <td class="name">
+                                <p>{{ $item->key_name }}</p>
+                            </td>
+                            <td class="japan">
+                                <input  type="text" class="ja" value="{{ $item->ja}}">
+                            </td>
+                            <td class="english">
+                                <input type="text" class="en" value="{{ $item->en }}">
+                            </td>
+                            <td>project tst</td>
+                            <td class="text-center"><button data-id="{{ $item->id }}" class="btn btn-warning me-1 mb-1 btn-sm"><span class="text-300 fas fa-edit"></span></button></td>
+                          </tr>
+                        @endforeach
+
                     </tbody>
                   </table>
                 </form>
@@ -143,6 +146,7 @@
                 'ja' : formData.get('ja'),
                 'en' : formData.get('en'),
                 'project_id' : formData.get('project_id'),
+                'type' : 'store',
             }
             $.ajax({
                 headers: {
@@ -181,13 +185,13 @@
                                    <p id="key_name">${res.data.key_name}</>
                                 </td>
                                 <td class="japan">
-                                    <input  type="text" name="ja" value="${res.data.ja}" id="japan">
+                                    <input class="ja" type="text" name="ja" value="${res.data.ja}" id="japan">
                                 </td>
                                 <td class="english">
-                                    <input  type="text" name="en" value="${res.data.en}" id="english">
+                                    <input class="en" type="text" name="en" value="${res.data.en}" id="english">
                                 </td>
                                 <td>project tst</td>
-                                <td class="text-center"><span class="text-500 fas fa-edit"></span></td>
+                                <td><button class="btn btn-warning me-1 mb-1 btn-sm" data-id="${res.data.id}"><span class="text-300 fas fa-edit"></span></button></td>
                             </tr>
                         `)
                         $('#ui-login-modal').modal('hide');
@@ -204,6 +208,39 @@
             });
            // console.log(formData.get('login_title_ja'));
             // $("input[name='firstName']").val();
+        })
+        //update
+        $("#dev-string-list").on('click', 'button', function(e){
+            e.preventDefault();
+            let japan = $(this).parent().parent().find('input');
+            let english = $(this).parent().parent().find('input');
+            let id = $(this).data("id");
+            console.log($(this).data("id"));
+
+            let data = {
+                'id' : id,
+                'key_name' : 'no need',
+                'ja' : japan[0].value,
+                'en' : english[1].value,
+                'type' : 'update',
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{route('ui.project.dev.setting.store')}}",
+                type: "post",
+                data: data,
+                success: function (res) {
+                    console.log(res);
+                    toastr.success(res.message, '', {timeOut: 2000, progressBar: true})
+                },
+                error: function(error) {
+
+                }
+            })
+
         })
 
     </script>
