@@ -1,21 +1,18 @@
 
 @extends('layout.app')
-@section('title', 'login UI Setting')
+@section('title', 'input form UI String')
 @include('layout.navbar')
 
 @section('mainContent')
     <div class="row pb-4 pt-2">
         <div class="col-12 text-end btn-lg">
-            @php
-                $sess = 1;
-            @endphp
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#ui-login-modal"><i class="bi bi-plus"></i>{{  $sess !==1 ? __('ui/button.password') : __("ui/button.EMAIL_ADDRESS_{$sess}")}}</button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#ui-login-modal"><i class="bi bi-plus"></i>{{ __('ui/button.ADD_BUTTON') }}</button>
         </div>
     </div>
 
     <!--***** login ui Modal *****-->
     <div class="modal fade" id="ui-login-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered" role="document">
+        <div class="modal-dialog  modal-lg modal-dialog-centered" role="document">
             <div class="modal-content position-relative">
                 <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
                     <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
@@ -23,13 +20,13 @@
                 </div>
 
                 <form id="form">
-                    <div class="modal-body p-0">
-                        <div class="rounded-top-3 py-3 ps-4 pe-6 bg-light">
+                    <div class="modal-body  p-0">
+                        <div class="rounded-top-3  py-3 ps-4 pe-6 bg-light">
                             <h4 class="mb-1 text-capitalize" id="modalExampleDemoLabel"> {{__('ui/validation/login.modalTitle')}}  </h4>
                         </div>
                         <div class="row p-3">
                             <!--***** login ui en *****-->
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="p-1 pb-0">
                                     <div class="mb-2">
                                         <label class="col-form-label" for="login_title_ja">Key Name</label>
@@ -37,24 +34,38 @@
                                         <span class="text-danger error mt-1"></span>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="col-form-label" for="japan">Japan Name</label>
-                                        <input class="form-control" id="ja" name="ja" type="text" placeholder=""/>
+                                        <label class="col-form-label" for="label_japan">Label Name Japan</label>
+                                        <input class="form-control" id="label_japan" name="label_ja" type="text" placeholder=""/>
                                         <span class="text-danger error mt-1"></span>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="col-form-label" for="english">English Name</label>
-                                        <input class="form-control" id="english" name="en" type="text" placeholder=""/>
+                                        <label class="col-form-label" for="label_en">Label Name English</label>
+                                        <input class="form-control" id="label_en" name="label_en" type="text" placeholder=""/>
                                         <span class="text-danger error mt-1"></span>
                                     </div>
-                                    <div class="mb-2">
-                                        <label class="col-form-label" for="login_btn_en">Project</label>
-                                        <select class="form-select" name="project_id" aria-label="Default select example">
-                                            <option selected="">Select Project</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
 
+                                </div>
+                            </div>
+                            <!--***** end login ui en *****-->
+                              <!--***** login ui en *****-->
+                              <div class="col-md-6">
+                                <div class="p-1 pb-0">
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="login_title_ja">Type</label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option value="">Select One</option>
+                                            <option value="1">Login</option>
+                                            <option value="2">Project</option>
+                                          </select>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="placeholder_ja">Placeholder Japan Name</label>
+                                        <input class="form-control" id="placeholder_ja" name="placeholder_ja" type="text" placeholder=""/>
+                                        <span class="text-danger error mt-1"></span>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="col-form-label" for="placeholder_en">Placeholder English Name</label>
+                                        <input class="form-control" id="placeholder_en" name="placeholder_en" type="text" placeholder=""/>
                                         <span class="text-danger error mt-1"></span>
                                     </div>
                                 </div>
@@ -94,14 +105,16 @@
                     <thead class="bg-200 text-900">
                       <tr>
                         <th class="sort" data-sort="key_name">Key Name</th>
-                        <th class="sort" data-sort="japan">Japan</th>
-                        <th class="sort" data-sort="english">English</th>
-                        <th class="sort" data-sort="project">Project</th>
+                        <th class="sort" data-sort="japan">Label Ja</th>
+                        <th class="sort" data-sort="japan">Label En</th>
+                        <th class="sort" data-sort="english">Placeholder Ja</th>
+                        <th class="sort" data-sort="english">Placeholder En</th>
+                        <th class="sort" data-sort="project">Type</th>
                         <th class="" data-sort="">Action</th>
                       </tr>
                     </thead>
                     <tbody class="list" id="dev-string-list">
-                        @foreach ($uiDevStrings as $item)
+                        @foreach ($inputForms as $item)
                         <tr>
                             <td class="name">
                                 <p>{{ $item->key_name }}</p>
@@ -140,22 +153,26 @@
 
             //for en field
             let key_name = formData.get('key_name');
-            let japan = formData.get('ja');
-            let english = formData.get('en');
-            let project = formData.get('project_id');
+            let label_ja = formData.get('label_ja');
+            let label_en = formData.get('label_en');
+            let placeholder_ja = formData.get('placeholder_ja');
+            let placeholder_en = formData.get('placeholder_en');
+            let type = formData.get('type');
 
             let data = {
                 'key_name' : formData.get('key_name'),
-                'ja' : formData.get('ja'),
-                'en' : formData.get('en'),
-                'project_id' : formData.get('project_id'),
+                'label_ja' : formData.get('label_ja'),
+                'label_en' : formData.get('label_en'),
+                'placeholder_ja' : formData.get('placeholder_ja'),
+                'placeholder_en' : formData.get('placeholder_en'),
+                'type' : formData.get('type'),
                 'type' : 'store',
             }
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{route('ui.project.dev.setting.store')}}",
+                url: "{{route('ui.input_form.store')}}",
                 type: "post",
                 data: data,
                 success: function (res) {
@@ -188,10 +205,16 @@
                                    <p id="key_name">${res.data.key_name}</>
                                 </td>
                                 <td class="japan">
-                                    <input class="ja" type="text" name="ja" value="${res.data.ja}" id="japan">
+                                    <input class="ja" type="text" name="ja" value="${res.data.label_ja}" id="japan">
                                 </td>
                                 <td class="english">
-                                    <input class="en" type="text" name="en" value="${res.data.en}" id="english">
+                                    <input class="en" type="text" name="en" value="${res.data.label_en}" id="english">
+                                </td>
+                                <td class="japan">
+                                    <input class="ja" type="text" name="ja" value="${res.data.placeholder_ja}" id="japan">
+                                </td>
+                                <td class="english">
+                                    <input class="en" type="text" name="en" value="${res.data.placeholder_en}" id="english">
                                 </td>
                                 <td>project tst</td>
                                 <td><button class="btn btn-warning me-1 mb-1 btn-sm" data-id="${res.data.id}"><span class="text-300 fas fa-edit"></span></button></td>
@@ -201,7 +224,7 @@
                     }
                 },
                 error:function (error){
-                    toastr.success(res.message, '', {timeOut: 2000, progressBar: true})
+                    toastr.error(res.message, '', {timeOut: 2000, progressBar: true})
                     // let err = error.responseJSON;
                     // $.each(err.errors,function (inx, value){
                     //     console.log(value)

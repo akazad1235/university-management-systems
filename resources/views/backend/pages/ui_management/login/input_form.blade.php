@@ -46,17 +46,6 @@
                                         <input class="form-control" id="english" name="en" type="text" placeholder=""/>
                                         <span class="text-danger error mt-1"></span>
                                     </div>
-                                    <div class="mb-2">
-                                        <label class="col-form-label" for="login_btn_en">Project</label>
-                                        <select class="form-select" name="project_id" aria-label="Default select example">
-                                            <option selected="">Select Project</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-
-                                        <span class="text-danger error mt-1"></span>
-                                    </div>
                                 </div>
                             </div>
                             <!--***** end login ui en *****-->

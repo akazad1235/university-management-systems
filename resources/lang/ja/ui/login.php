@@ -1,12 +1,16 @@
 <?php
 
+use App\Models\TblUiInputForm;
 use App\Models\TblUiString;
 
-$allData = TblUiString::get();
+$allData = TblUiInputForm::select(['key_name', 'label_ja','placeholder_ja'])->where('type', 0)->get();
+//key name [ EMAIL_ADDRESS, PASSWORD]
+        //dd($allData);
+    $data = [];
 
-$data = [];
+    foreach ($allData as $key => $item) {
+        $data[$item->key_name] = ['label' => $item->label_ja, 'placeholder' => $item->placeholder_ja];
 
-foreach ($allData as $item) {
-    $data[$item->key_name] = $item->ja;
-}
+    }
+//dd($data);
 return $data;

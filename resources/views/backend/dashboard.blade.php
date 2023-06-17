@@ -7,7 +7,11 @@
           <div class="bg-holder bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-3.png);"></div>
           <!--/.bg-holder-->
           <div class="card-header z-1">
-            <h5 class="text-primary">Welcome to Falcon! </h5>
+            @php
+                $sess = session()->get('sessionId');
+                $data =trans("ui/button.EMAIL_ADDRESS_{$sess}");
+            @endphp
+            <h5 class="text-primary">Welcome to Falcon! {{  strpos($data, 'button')  != null ? __('ui/button.EMAIL_ADDRESS') : __("ui/button.EMAIL_ADDRESS_{$sess}")}}</h5>
             <h6 class="text-600">Here are some quick links for you to start </h6>
           </div>
           <div class="card-body z-1">

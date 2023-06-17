@@ -116,8 +116,8 @@
                         </a>
                         <ul class="nav collapse show" id="dashboard">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{route('ui.login')}}">
-                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Login</span>
+                                <a class="nav-link active" href="{{route('ui.input_form.index')}}">
+                                    <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Input String</span>
                                     </div>
                                 </a>
                             </li>

@@ -39,27 +39,10 @@ class LoginUiController extends Controller
 
       // return  $request->all();
 
-        $arr = [
-            'LOGIN_TITLE' => [$request->login_title_en, $request->login_title_ja,],
-            'EMAIL_ADDRESS' => [$request->email_address_en, $request->email_address_ja],
-            'PASSWORD' => [$request->password_en, $request->password_ja],
-            'SUBMIT' => [$request->login_btn_en, $request->login_btn_ja],
-        ];
-
-        foreach ($arr as $key=>$value){
-            TblUiString::create([
-                'project_id' => 1,
-                'key_name' => $key,
-                'en' => $value[0],
-                'ja' => $value[1],
-            ]);
-        }
-
-        return 'okkkkkkkk';
-
-
 
     }
+    public function inputStore(Request $request){
 
+    }
 
 }
