@@ -121,12 +121,12 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link active" href="{{route('ui.project.index')}}">
                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Project</span>
                                     </div>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{route('ui.project.dev.setting.index')}}">
                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1 text-dark">Project Dev Setting</span>

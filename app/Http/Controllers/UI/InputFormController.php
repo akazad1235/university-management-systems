@@ -12,6 +12,7 @@ class InputFormController extends Controller
 {
     use ResponseTrait;
     public function index(){
+
         $inputForms =TblUiInputForm::get();
         return view('backend.pages.ui_management.input_form.index', ['inputForms' => $inputForms]);
     }
@@ -25,6 +26,7 @@ class InputFormController extends Controller
                 'label_en' => $request->label_en,
                 'placeholder_ja' => $request->placeholder_ja,
                 'placeholder_en' => $request->placeholder_en,
+               'type' => $request->type,
             ]);
 
             if($result){

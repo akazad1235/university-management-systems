@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('tbl_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name_ja');
+            $table->string('name_en');
             $table->string('email');
-            $table->string('description');
+            $table->string('description_ja');
+            $table->string('description_en');
             $table->integer('project_code');
             $table->string('slug');
             $table->dateTime('start_date');

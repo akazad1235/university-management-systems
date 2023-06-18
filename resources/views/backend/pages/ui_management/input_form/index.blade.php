@@ -52,11 +52,11 @@
                                 <div class="p-1 pb-0">
                                     <div class="mb-2">
                                         <label class="col-form-label" for="login_title_ja">Type</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" id="types" name="type" aria-label="Default select example">
                                             <option value="">Select One</option>
                                             <option value="1">Login</option>
                                             <option value="2">Project</option>
-                                          </select>
+                                        </select>
                                     </div>
                                     <div class="mb-2">
                                         <label class="col-form-label" for="placeholder_ja">Placeholder Japan Name</label>
@@ -120,10 +120,16 @@
                                 <p>{{ $item->key_name }}</p>
                             </td>
                             <td class="japan">
-                                <input  type="text" class="ja" value="{{ $item->ja}}">
+                                <input  type="text" class="ja" value="{{ $item->label_ja}}">
+                            </td>
+                            <td class="japan">
+                                <input  type="text" class="ja" value="{{ $item->label_en}}">
                             </td>
                             <td class="english">
-                                <input type="text" class="en" value="{{ $item->en }}">
+                                <input type="text" class="en" value="{{ $item->placeholder_ja }}">
+                            </td>
+                            <td class="english">
+                                <input type="text" class="en" value="{{ $item->placeholder_en }}">
                             </td>
                             <td>project tst</td>
                             <td class="text-center"><button data-id="{{ $item->id }}" class="btn btn-warning me-1 mb-1 btn-sm"><span class="text-300 fas fa-edit"></span></button></td>
@@ -157,7 +163,7 @@
             let label_en = formData.get('label_en');
             let placeholder_ja = formData.get('placeholder_ja');
             let placeholder_en = formData.get('placeholder_en');
-            let type = formData.get('type');
+            let type = $("#types").val();
 
             let data = {
                 'key_name' : formData.get('key_name'),
@@ -166,7 +172,7 @@
                 'placeholder_ja' : formData.get('placeholder_ja'),
                 'placeholder_en' : formData.get('placeholder_en'),
                 'type' : formData.get('type'),
-                'type' : 'store',
+                'store_type' : 'store'
             }
             $.ajax({
                 headers: {

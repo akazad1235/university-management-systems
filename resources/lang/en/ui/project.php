@@ -3,7 +3,7 @@
 use App\Models\TblUiInputForm;
 use App\Models\TblUiString;
 
-$allData = TblUiInputForm::select(['key_name', 'label_en','placeholder_en'])->where('type', 1)->get();
+$allData = TblUiInputForm::select(['key_name', 'label_en','placeholder_en'])->where('type', 2)->get();
 //key name [ EMAIL_ADDRESS, PASSWORD]
          //dd($allData);
         $data = [];

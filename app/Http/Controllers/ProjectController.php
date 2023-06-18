@@ -15,21 +15,17 @@ class ProjectController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'name' => 'required',
-                'email' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-            ]
-        );
+       // return $request->all();
+
         try {
             TblProject::create([
-                'name' => $request->name,
+                'name_ja' => $request->name_ja,
+                'name_en' => $request->name_en,
                 'email' => $request->email,
-                'slug' => str_replace(' ', '_', $request->name),
+                'slug' => str_replace(' ', '_', $request->name_en),
                 'project_code' => rand(111111, 999999),
-                'description' => $request->description,
+                'description_ja' => $request->description_ja,
+                'description_en' => $request->description_en,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
             ]);
