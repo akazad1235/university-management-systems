@@ -257,21 +257,21 @@
                 'type' : 'update',
             }
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{route('ui.project.dev.setting.store')}}",
-                type: "post",
-                data: data,
-                success: function (res) {
-                    console.log(res);
-                    toastr.success(res.message, '', {timeOut: 2000, progressBar: true})
-                },
-                error: function(error) {
+            // $.ajax({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     url: "{{route('ui.project.dev.setting.store')}}",
+            //     type: "post",
+            //     data: data,
+            //     success: function (res) {
+            //         console.log(res);
+            //         toastr.success(res.message, '', {timeOut: 2000, progressBar: true})
+            //     },
+            //     error: function(error) {
 
-                }
-            })
+            //     }
+            // })
 
         })
 

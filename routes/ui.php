@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UI\LoginUiController;
 use App\Http\Controllers\UI\ProjectController;
 use App\Http\Controllers\UI\ProjectDevSettingController;
-use App\Http\Controllers\Ui\InputFormController;
+use App\Http\Controllers\UI\InputFormController;
 
 Route::middleware(['auth'])->name('ui.')->group(function(){
     Route::get('/login', [LoginUiController::class, 'login'])->name('login');
@@ -22,7 +22,7 @@ Route::middleware(['auth'])->name('ui.')->group(function(){
         Route::get('/input/string', [LoginUiController::class, 'index'])->name('dev.setting.index');
         Route::post('/input/string', [LoginUiController::class, 'inputStore'])->name('input.string');
     });
-    Route::prefix('input/form')->name('input_form.')->group(function(){
+    Route::prefix('/input/form')->name('input_form.')->group(function(){
         Route::get('/string', [InputFormController::class, 'index'])->name('index');
         Route::post('/input/string', [InputFormController::class, 'store'])->name('store');
     });

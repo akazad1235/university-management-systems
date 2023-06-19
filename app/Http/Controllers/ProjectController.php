@@ -38,14 +38,17 @@ class ProjectController extends Controller
      *
      */
     public function update(Request $request){
+      //  return $request->all();
         try {
             $project =  TblProject::findOrFail($request->id);
             if($project){
                 $project->update([
-                    'name' => $request->name,
+                    'name_ja' => $request->name_ja,
+                    'name_en' => $request->name_en,
                     'email' => $request->email,
                     'slug' => str_replace(' ', '_', $request->name),
-                    'description' => $request->description,
+                    'description_ja' => $request->description_ja,
+                    'description_en' => $request->description_en,
                     'start_date' => $request->start_date,
                     'end_date' => $request->end_date,
                 ]);

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -74,5 +76,51 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function exprotChart(Request $request){
+     // return  $request->file('data');
+        $chartImage = $request->input('chartImage');
+        // Decode the base64 image data
+        $imageData = base64_decode($chartImage);
+       // return $imageData;
+        $img_encode = str_replace('data:image/png;base64,', '', $chartImage);
+        $img = str_replace(' ', '+', $img_encode);
+        $data = base64_decode($img);
+
+        // Generate a unique filename for the chart image
+        $filename = uniqid('chart_') . '.png';
+
+        // Save the chart image to the storage directory
+        Storage::disk('public')->put('charts/' . $filename, $data);
+        return $chartImage;
+         return $request->all();
+    }
+    public function pdf(Request $request){
+       // return $request->all();
+        return view('testPdf');
+
+        $data =[
+            'tes' => 'dse'
+        ];
+        $pdfOptions = [
+            'isRemoteEnabled' => true,
+            'enable_html5_parser' => true,
+            'isJavascriptEnabled'=> true,
+            // Add more options here...
+        ];
+        $chartHtml = view('testPdf', compact('data'))->render();
+        //return $chartHtml;
+//        $options = new Options();
+//        $options->set('defaultFont', 'Arial');
+        $dompdf = Pdf::loadHtml($chartHtml);
+        //$dompdf->loadHtml();
+        //$dompdf->render();
+        return  $dompdf->stream('chart.pdf');
+       //  $pdf->stream();
+
+//        $pdf = Pdf::loadView('testPdf', $data);
+//        $pdf->setOptions($pdfOptions);
+//        return $pdf->download('invoice.pdf');
+        return back();
     }
 }

@@ -25,8 +25,18 @@ Route::get('/', function () {
    // return view('backend.dashboard');
     return redirect('login');
 });
+Route::get('/cache-clear', function () {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    Artisan::call('route:clear');
+    Artisan::call('optimize:clear');
+    return 'DONE'; //Return anything;
+});
 
 Route::middleware(['auth'])->group(function(){
+
+    Route::get('/pdf', [UserController::class, 'pdf'])->name('pdf');
+    Route::post('/pdf', [UserController::class, 'exprotChart'])->name('pdf');
     //role permission
     Route::middleware(['role:super-admin|admin'])->prefix('/permission')->name('permission.')->group(function(){
         //role
