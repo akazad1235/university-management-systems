@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Permission;
 
 use App\Http\Controllers\Controller;
+use App\Models\TblProject;
 use App\Models\User;
 
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -26,6 +27,7 @@ class RolePermissionController extends Controller
         return view('backend.pages.permission.role_create', ['permissions' => $permissions, 'groupByPermissions' => $groupByPermissions]);
     }
     public function store(Request $request){
+
         $role = Role::create([
             'name' => $request->name,
             'group_name' => $request->group_name

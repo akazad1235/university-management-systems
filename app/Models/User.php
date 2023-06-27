@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -55,5 +56,9 @@ class User extends Authenticatable
     }
     static public function getPermissionByGroupName($groupName){
         return DB::table('permissions')->select('name')->where('group_name', $groupName)->get();
+    }
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(TblProject::class, 'tbl_project_users', 'tbl_project_id', 'user_id');
     }
 }
